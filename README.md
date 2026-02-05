@@ -1,1 +1,1 @@
-# Afet-Haz-rl-k
+# Afet-Hazirlik
