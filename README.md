@@ -1,0 +1,1 @@
+# Afet-Haz-rl-k
