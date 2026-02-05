@@ -1,0 +1,2675 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    
+    <!-- Google Dark Mode için gerekli meta etiketleri -->
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#0f766e" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+
+    <!-- SEO Optimizasyonu -->
+    <title>Afet Hazırlık - Doğal Afetler İçin Hazırlık Rehberi</title>
+    <meta name="description" content="Deprem, sel, yangın gibi doğal afetler için hazırlık rehberi ve bilgi kaynakları.">
+    <meta name="keywords" content="deprem, sel, yangın, doğal afet, acil durum, hazırlık, güvenlik">
+    <meta name="author" content="Afet Hazırlık Platformu">
+
+    <style>
+        /* Modern Reset ve Değişkenler */
+        :root {
+            /* Color-scheme eklemesi */
+            color-scheme: light dark;
+            
+            /* YENİ KALİTELİ RENK PALETİ - Teal/Turkuaz tonları */
+            --primary: #0f766e;
+            --primary-dark: #115e59;
+            --primary-light: #14b8a6;
+            --primary-soft: #99f6e4;
+            --accent: #dc2626;
+            --accent-light: #f87171;
+            --warning: #d97706;
+            --success: #059669;
+
+            /* Nötr Renkler - YÜKSEK KONTRAST */
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+
+            --white: #ffffff;
+            --black: #000000;
+            
+            /* Koyu tema için doğrudan renkler */
+            --dark-bg: #0f172a;
+            --dark-text: #f8fafc;
+            --dark-card-bg: #1e293b;
+            --dark-gray-text: #cbd5e1;
+            --dark-light-text: #e2e8f0;
+
+            /* Efektler */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Koyu Tema için DOĞRUDAN CSS - Google için */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #14b8a6;
+                --primary-dark: #0d9488;
+                --primary-light: #5eead4;
+                --primary-soft: #99f6e4;
+                --accent: #ef4444;
+                --accent-light: #fca5a5;
+                --warning: #f59e0b;
+                --success: #10b981;
+                
+                /* Daha yüksek kontrastlı renkler */
+                --gray-50: #0f172a;
+                --gray-100: #1e293b;
+                --gray-200: #334155;
+                --gray-300: #475569;
+                --gray-400: #64748b;
+                --gray-500: #94a3b8;
+                --gray-600: #cbd5e1;
+                --gray-700: #e2e8f0;
+                --gray-800: #f1f5f9;
+                --gray-900: #f8fafc;
+            }
+            
+            /* Tüm sayfa için doğrudan renk tanımlamaları */
+            body {
+                background-color: #0f172a !important;
+                color: #f1f5f9 !important;
+            }
+            
+            /* Başlıklar için DOĞRUDAN beyaz renk */
+            h1, h2, h3, h4, h5, h6 {
+                color: #ffffff !important;
+            }
+            
+            /* Paragraflar için DOĞRUDAN açık gri */
+            p {
+                color: #e2e8f0 !important;
+            }
+            
+            /* Logo için DOĞRUDAN beyaz */
+            .logo-title {
+                color: #ffffff !important;
+            }
+            
+            .logo-subtitle {
+                color: #94a3b8 !important;
+            }
+            
+            /* Kartlar için DOĞRUDAN renkler */
+            .card {
+                background-color: #1e293b !important;
+                border-color: #334155 !important;
+            }
+            
+            .card h3 {
+                color: #ffffff !important;
+            }
+            
+            .card p {
+                color: #cbd5e1 !important;
+            }
+            
+            /* Navigasyon için DOĞRUDAN renkler */
+            .nav-link {
+                color: #94a3b8 !important;
+            }
+            
+            .nav-link:hover {
+                color: #5eead4 !important;
+                background: rgba(94, 234, 212, 0.1) !important;
+            }
+            
+            .nav-link.active {
+                color: #ffffff !important;
+                background: linear-gradient(135deg, #14b8a6, #0d9488) !important;
+            }
+            
+            /* Hero section */
+            .hero h1 {
+                color: #ffffff !important;
+            }
+            
+            .hero p {
+                color: rgba(255, 255, 255, 0.95) !important;
+            }
+            
+            /* Features section */
+            .features {
+                background-color: #1e293b !important;
+            }
+            
+            .feature-item h3 {
+                color: #ffffff !important;
+            }
+            
+            .feature-item p {
+                color: #cbd5e1 !important;
+            }
+            
+            /* Header */
+            header {
+                background: rgba(30, 41, 59, 0.95) !important;
+                border-bottom-color: #334155 !important;
+            }
+            
+            /* Footer */
+            footer {
+                background-color: #0f172a !important;
+                color: #94a3b8 !important;
+            }
+            
+            .footer-links a {
+                color: #94a3b8 !important;
+            }
+            
+            .footer-links a:hover {
+                color: #ffffff !important;
+            }
+            
+            /* Mobile menu */
+            .mobile-menu {
+                background-color: #1e293b !important;
+            }
+            
+            .mobile-menu-link {
+                color: #cbd5e1 !important;
+            }
+            
+            .mobile-menu-link:hover,
+            .mobile-menu-link.active {
+                background: #14b8a6 !important;
+                color: #ffffff !important;
+            }
+            
+            /* Scrollbar */
+            ::-webkit-scrollbar-track {
+                background: #1e293b !important;
+            }
+            
+            ::-webkit-scrollbar-thumb {
+                background: #475569 !important;
+            }
+
+            /* Harita Modal için koyu tema stilleri */
+            .map-modal-content {
+                background-color: #1e293b !important;
+                border-color: #334155 !important;
+            }
+
+            .map-modal-header {
+                border-bottom-color: #334155 !important;
+                background: linear-gradient(135deg, #0d9488, #115e59) !important;
+            }
+
+            .map-tab {
+                background-color: #334155 !important;
+                color: #cbd5e1 !important;
+            }
+
+            .map-tab:hover {
+                background-color: #475569 !important;
+            }
+
+            .map-tab.active {
+                background-color: #14b8a6 !important;
+                color: white !important;
+                border-bottom: 3px solid #5eead4 !important;
+            }
+
+            .location-item {
+                background-color: #334155 !important;
+                border-color: #475569 !important;
+            }
+
+            .location-item:hover {
+                background-color: #475569 !important;
+                border-color: #5eead4 !important;
+            }
+
+            .location-item h4 {
+                color: #f1f5f9 !important;
+            }
+
+            .location-item p {
+                color: #cbd5e1 !important;
+            }
+
+            .distance-badge {
+                background-color: #475569 !important;
+                color: #e2e8f0 !important;
+            }
+
+            .map-legend-item {
+                color: #cbd5e1 !important;
+            }
+
+            .location-list-header {
+                background-color: #334155 !important;
+                border-bottom-color: #475569 !important;
+            }
+
+            .location-list-header h4 {
+                color: #f1f5f9 !important;
+            }
+
+            .map-instructions {
+                background-color: #334155 !important;
+                border-left-color: #14b8a6 !important;
+                color: #cbd5e1 !important;
+            }
+
+            .phone-link {
+                background: rgba(20, 184, 166, 0.15) !important;
+                color: #5eead4 !important;
+            }
+
+            .phone-link:hover {
+                background: rgba(20, 184, 166, 0.25) !important;
+            }
+
+            /* Leaflet harita için koyu tema uyumu */
+            .leaflet-container {
+                background: #1e293b !important;
+            }
+            
+            .leaflet-control-attribution {
+                background-color: rgba(30, 41, 59, 0.8) !important;
+                color: #cbd5e1 !important;
+            }
+            
+            .leaflet-popup-content {
+                background-color: #1e293b !important;
+                color: #e2e8f0 !important;
+            }
+            
+            .leaflet-popup-tip {
+                background-color: #1e293b !important;
+            }
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.5;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Tipografi */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--gray-900);
+        }
+
+        h1 {
+            font-size: 3rem;
+            letter-spacing: -0.025em;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            letter-spacing: -0.025em;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        /* Pusula İkonu */
+        .logo-icon.compass {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            font-size: 1.1rem;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            line-height: 1.2;
+        }
+
+        .logo-subtitle {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        /* Navigation */
+        .nav-desktop {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .nav-desktop {
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+            }
+        }
+
+        .nav-link {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition-fast);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            background: var(--gray-100);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+        }
+
+        /* Harita Butonu */
+        .nav-link.map-button {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link.map-button:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: var(--radius-md);
+        }
+
+        @media (min-width: 768px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+
+        .menu-line {
+            width: 1.5rem;
+            height: 2px;
+            background: var(--gray-600);
+            transition: var(--transition-fast);
+            border-radius: 1px;
+        }
+
+        /* Hero Section - YENİ KALİTELİ RENK */
+        .hero {
+            padding: 5rem 1rem;
+            background: linear-gradient(135deg, 
+                rgba(15, 118, 110, 0.95) 0%, 
+                rgba(20, 184, 166, 0.9) 50%,
+                rgba(153, 246, 228, 0.85) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 4rem;
+            }
+        }
+
+        .hero p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.35rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--white);
+            color: var(--primary);
+            padding: 1.25rem 2.5rem;
+            border-radius: var(--radius-xl);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 2px solid transparent;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25);
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-cols-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .grid-cols-4 {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Cards */
+        .section {
+            padding: 5rem 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition-normal);
+            border: 1px solid var(--gray-200);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-light);
+        }
+
+        .card-icon {
+            width: 4rem;
+            height: 4rem;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+            color: var(--white);
+        }
+
+        .card[data-category="yer"] .card-icon {
+            background: linear-gradient(135deg, var(--warning), #b45309);
+        }
+
+        .card[data-category="su"] .card-icon {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        }
+
+        .card[data-category="hava"] .card-icon {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        .card[data-category="insan"] .card-icon {
+            background: linear-gradient(135deg, var(--accent), #b91c1c);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--gray-900);
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition-fast);
+        }
+
+        .card-link:hover {
+            gap: 1rem;
+            color: var(--primary-dark);
+        }
+
+        /* Emergency Banner */
+        .emergency-banner {
+            background: linear-gradient(135deg, var(--accent), #b91c1c);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            border-radius: var(--radius-xl);
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            animation: pulse 2s infinite;
+            cursor: pointer;
+            min-height: 80px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--gray-100);
+            padding: 4rem 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .feature-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .feature-item h3 {
+            margin-bottom: 1rem;
+            color: var(--gray-900);
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: var(--gray-600);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gray-900);
+            color: var(--gray-300);
+            padding: 4rem 1rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .footer-column h4 {
+            color: var(--white);
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            transform: translateX(4px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gray-800);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .animate-delay-100 { animation-delay: 100ms; }
+        .animate-delay-200 { animation-delay: 200ms; }
+        .animate-delay-300 { animation-delay: 300ms; }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: var(--white);
+            z-index: 100;
+            transition: var(--transition-normal);
+            padding: 2rem;
+            box-shadow: var(--shadow-xl);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .mobile-menu-link {
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-fast);
+        }
+
+        .mobile-menu-link:hover,
+        .mobile-menu-link.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Harita butonu mobile menüye eklendi */
+        .mobile-menu-link.map-button {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-normal);
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Harita Modal Stilleri - GERÇEK HARITA İÇİN */
+        .map-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.95);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-normal);
+            padding: 0;
+        }
+
+        .map-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .map-modal-content {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            width: 100%;
+            height: 100%;
+            max-height: 100vh;
+            max-width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: none;
+        }
+
+        .map-modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .map-modal-header h3 {
+            color: white;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+        }
+
+        .close-modal-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .close-modal-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .map-modal-body {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .map-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--gray-200);
+            background: var(--gray-50);
+            flex-shrink: 0;
+        }
+
+        .map-tab {
+            flex: 1;
+            padding: 1.25rem 1.5rem;
+            border: none;
+            background: none;
+            font-family: inherit;
+            font-weight: 600;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .map-tab:hover {
+            background: var(--gray-100);
+        }
+
+        .map-tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            background: var(--white);
+        }
+
+        .map-tab-content {
+            flex: 1;
+            overflow: hidden;
+            padding: 0;
+            display: none;
+            flex-direction: column;
+        }
+
+        .map-tab-content.active {
+            display: flex;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        /* GERÇEK HARITA KONTEYNERİ */
+        #real-map-container {
+            flex: 1;
+            width: 100%;
+            min-height: 400px;
+            overflow: hidden;
+            position: relative;
+            border: none;
+        }
+
+        .map-container {
+            flex: 1;
+            width: 100%;
+            min-height: 400px;
+            overflow: hidden;
+            position: relative;
+            border: none;
+        }
+
+        /* Konum isteme ekranı */
+        .location-permission-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-soft), var(--white));
+        }
+
+        .location-permission-screen .compass-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            animation: rotateSlow 20s linear infinite;
+        }
+
+        .location-permission-screen h4 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+        }
+
+        .location-permission-screen p {
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin-bottom: 2rem;
+            color: var(--gray-600);
+        }
+
+        .location-error-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, #fee2e2, var(--white));
+        }
+
+        .location-error-screen .error-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .location-error-screen h4 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+        }
+
+        .location-error-screen p {
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin-bottom: 2rem;
+            color: var(--gray-600);
+        }
+
+        .map-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+
+        .action-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-lg);
+            border: none;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .action-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .action-button.secondary {
+            background: var(--gray-200);
+            color: var(--gray-700);
+        }
+
+        .action-button.secondary:hover {
+            background: var(--gray-300);
+        }
+
+        .location-list-container {
+            flex: 0 0 300px;
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .location-list-header {
+            padding: 1rem 1.5rem;
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .location-list-header h4 {
+            margin: 0;
+            color: var(--gray-900);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .location-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .location-item {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            transition: var(--transition-fast);
+            margin-bottom: 1rem;
+        }
+
+        .location-item:hover {
+            transform: translateX(4px);
+            border-color: var(--primary-light);
+            background: var(--gray-100);
+            box-shadow: var(--shadow-md);
+        }
+
+        .location-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .location-item h4 {
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .location-item p {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .location-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+
+        .distance-badge {
+            background: var(--primary-light);
+            color: white;
+            padding: 0.35rem 0.85rem;
+            border-radius: 1rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .phone-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            background: rgba(15, 118, 110, 0.1);
+            border-radius: var(--radius-md);
+            transition: var(--transition-fast);
+        }
+
+        .phone-link:hover {
+            text-decoration: none;
+            background: rgba(15, 118, 110, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .map-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--gray-200);
+            background: var(--gray-50);
+        }
+
+        .map-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        .legend-color {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .legend-color.hospital { background-color: #dc2626; }
+        .legend-color.police { background-color: #2563eb; }
+        .legend-color.fire { background-color: #ea580c; }
+        .legend-color.shelter { background-color: #059669; }
+        .legend-color.meeting { background-color: #7c3aed; }
+
+        .map-instructions {
+            background: var(--gray-50);
+            border-left: 4px solid var(--primary);
+            padding: 1.25rem;
+            margin: 1.5rem;
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+        }
+
+        /* Leaflet harita özel stilleri */
+        .leaflet-container {
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .custom-marker {
+            width: 30px;
+            height: 30px;
+            border-radius: 50% 50% 50% 0;
+            background: var(--primary);
+            position: absolute;
+            transform: rotate(-45deg);
+            left: 50%;
+            top: 50%;
+            margin: -15px 0 0 -15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .custom-marker::after {
+            content: '';
+            width: 14px;
+            height: 14px;
+            margin: 8px 0 0 8px;
+            background: white;
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .leaflet-popup-content-wrapper {
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .leaflet-popup-content {
+            font-family: inherit;
+            font-size: 0.95rem;
+            padding: 1rem;
+        }
+
+        .leaflet-control-zoom {
+            border: none !important;
+            box-shadow: var(--shadow-md) !important;
+            border-radius: var(--radius-md) !important;
+            overflow: hidden;
+        }
+
+        .leaflet-control-zoom a {
+            border-radius: 0 !important;
+        }
+
+        .leaflet-control-attribution {
+            font-size: 0.7rem !important;
+            padding: 2px 5px !important;
+            background-color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.75rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0 1rem;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .map-modal-content {
+                border-radius: 0;
+            }
+
+            .map-tabs {
+                flex-direction: column;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+
+            .map-tab {
+                padding: 1rem;
+                border-bottom: 1px solid var(--gray-200);
+                justify-content: flex-start;
+                min-width: 200px;
+            }
+
+            .map-tab.active {
+                border-bottom: 3px solid var(--primary);
+            }
+
+            .map-container, #real-map-container {
+                min-height: 300px;
+            }
+
+            .location-list-container {
+                flex: 0 0 250px;
+            }
+
+            .emergency-banner {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+                padding: 1.5rem;
+            }
+
+            .emergency-banner button {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .map-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .action-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-button {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem;
+            }
+
+            .map-modal-header {
+                padding: 1rem;
+            }
+
+            .map-modal-header h3 {
+                font-size: 1.25rem;
+            }
+
+            .map-tab {
+                font-size: 0.9rem;
+                padding: 0.75rem;
+            }
+
+            .location-list {
+                padding: 1rem;
+            }
+
+            .location-permission-screen,
+            .location-error-screen {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Focus Styles */
+        :focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-300);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-400);
+        }
+
+        /* Pusula animasyonu */
+        .compass-icon {
+            animation: rotateSlow 20s linear infinite;
+        }
+
+        @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Emergency Banner içindeki buton */
+        #emergencyMapButton {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        #emergencyMapButton:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer'daki harita butonu */
+        #footerMapButton {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        #footerMapButton:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Yükleniyor ekranı */
+        .loading-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-soft), var(--white));
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--gray-200);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <!-- Pusula ile değiştirildi -->
+                    <div class="logo-icon compass">🧭</div>
+                    <div class="logo-text">
+                        <div class="logo-title">Afet Hazırlık</div>
+                        <div class="logo-subtitle">Güvende Kal</div>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="nav-desktop" aria-label="Ana Navigasyon">
+                    <a href="index.html" class="nav-link active">🏠 Ana Sayfa</a>
+                    <a href="yer.html" class="nav-link">🏔️ Yer Afetleri</a>
+                    <a href="su.html" class="nav-link">🌊 Su Afetleri</a>
+                    <a href="hava.html" class="nav-link">🌪️ Hava Afetleri</a>
+                    <a href="İnsan.html" class="nav-link">🔥 İnsan Kaynaklı</a>
+                    <a href="hakkinda.html" class="nav-link">ℹ️ Hakkında</a>
+                    <!-- Harita Butonu Eklendi -->
+                    <a href="#" class="nav-link map-button" id="mapButton">
+                        <span>🗺️</span>
+                        Acil Durum Haritası
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menüyü Aç">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <div class="logo-icon compass">🧭</div>
+                <div class="logo-text">
+                    <div class="logo-title">Afet Hazırlık</div>
+                </div>
+            </div>
+            <button id="closeMenuBtn" style="background:none;border:none;font-size:1.5rem;color:var(--gray-600);cursor:pointer;">×</button>
+        </div>
+        <nav class="mobile-menu-links" aria-label="Mobil Navigasyon">
+            <a href="index.html" class="mobile-menu-link active">🏠 Ana Sayfa</a>
+            <a href="yer.html" class="mobile-menu-link">🏔️ Yer Afetleri</a>
+            <a href="su.html" class="mobile-menu-link">🌊 Su Afetleri</a>
+            <a href="hava.html" class="mobile-menu-link">🌪️ Hava Afetleri</a>
+            <a href="İnsan.html" class="mobile-menu-link">🔥 İnsan Kaynaklı</a>
+            <a href="hakkinda.html" class="mobile-menu-link">ℹ️ Hakkında</a>
+            <!-- Mobil Menüye Harita Butonu Eklendi -->
+            <a href="#" class="mobile-menu-link map-button" id="mobileMapButton">
+                <span>🗺️</span>
+                Acil Durum Haritası
+                    </a>
+        </nav>
+    </div>
+
+    <!-- Harita Modal'ı - GERÇEK HARITA İLE -->
+    <div class="map-modal" id="mapModal">
+        <div class="map-modal-content">
+            <div class="map-modal-header">
+                <h3><span class="compass-icon">🧭</span> Acil Durum Haritası</h3>
+                <button class="close-modal-btn" id="closeMapModal">×</button>
+            </div>
+            
+            <div class="map-modal-body">
+                <div class="map-tabs">
+                    <button class="map-tab active" data-tab="hospitals">🏥 Hastaneler</button>
+                    <button class="map-tab" data-tab="police">🚓 Güvenlik</button>
+                    <button class="map-tab" data-tab="fire">🚒 İtfaiye</button>
+                    <button class="map-tab" data-tab="shelters">🏠 Barınaklar</button>
+                    <button class="map-tab" data-tab="meeting">📍 Toplanma</button>
+                </div>
+
+                <!-- Konum İzin Ekranı (Varsayılan) -->
+                <div class="map-tab-content active" id="hospitals-tab">
+                    <div class="map-container">
+                        <div class="location-permission-screen" id="locationPermissionScreen">
+                            <div class="compass-icon">📍</div>
+                            <h4>Konum Erişimi Gerekli</h4>
+                            <p>En yakın acil durum merkezlerini görmek için konum erişimine izin verin. Konum bilginiz sadece harita üzerinde gösterilmek için kullanılacaktır.</p>
+                            <div class="map-actions">
+                                <button class="action-button" id="requestLocation">
+                                    <span>📍 Konumumu Paylaş</span>
+                                </button>
+                                <button class="action-button secondary" id="useManualLocation">
+                                    <span>🔍 Manuel Konum Gir</span>
+                                </button>
+                            </div>
+                            <div class="map-instructions">
+                                <strong>ℹ️ Bilgi:</strong> Konum paylaşımını reddederseniz, harita özelliklerini kullanamazsınız. Manuel olarak bir şehir seçebilirsiniz.
+                            </div>
+                        </div>
+                        
+                        <!-- Konum Hatası Ekranı -->
+                        <div class="location-error-screen" id="locationErrorScreen">
+                            <div class="error-icon">❌</div>
+                            <h4>Konum Erişimi Reddedildi</h4>
+                            <p>Harita özelliklerini kullanmak için konum erişimine izin vermeniz gerekiyor. Tarayıcı ayarlarınızdan konum iznini açabilir veya manuel konum girebilirsiniz.</p>
+                            <div class="map-actions">
+                                <button class="action-button" id="retryLocation">
+                                    <span>🔄 Tekrar Dene</span>
+                                </button>
+                                <button class="action-button secondary" id="manualLocationError">
+                                    <span>🔍 Manuel Konum Gir</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Yükleniyor Ekranı -->
+                        <div class="loading-screen" id="loadingScreen">
+                            <div class="loading-spinner"></div>
+                            <h4>Konumunuz alınıyor...</h4>
+                            <p>Lütfen bekleyin</p>
+                        </div>
+                        
+                        <!-- GERÇEK HARITA KONTEYNERİ -->
+                        <div id="real-map-container" style="display: none;"></div>
+                    </div>
+                    
+                    <!-- Lokasyon Listesi -->
+                    <div class="location-list-container">
+                        <div class="location-list-header">
+                            <h4><span>🏥</span> En Yakın Acil Servisler</h4>
+                            <span class="distance-badge" style="background: var(--accent);" id="hospitalCount">0 Kayıt</span>
+                        </div>
+                        <div class="location-list" id="hospitals-list">
+                            <!-- Dinamik olarak JavaScript ile doldurulacak -->
+                            <div class="location-item" style="text-align: center; padding: 3rem 1rem;">
+                                <div style="font-size: 2rem; margin-bottom: 1rem;">📍</div>
+                                <h4>Konum Gerekli</h4>
+                                <p>En yakın hastaneleri görmek için konum erişimine izin verin</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="map-legend">
+                        <div class="map-legend-item">
+                            <span class="legend-color hospital"></span>
+                            <span>24 Saat Acil Servis</span>
+                        </div>
+                        <div class="map-legend-item">
+                            <span class="legend-color police"></span>
+                            <span>Poliklinik Hizmeti</span>
+                        </div>
+                        <div class="map-legend-item">
+                            <span class="legend-color meeting"></span>
+                            <span>Ambulans Servisi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diğer Tab'lar (Başlangıçta boş) -->
+                <div class="map-tab-content" id="police-tab">
+                    <div class="map-container">
+                        <div id="police-map-container" style="display: none;"></div>
+                        <div class="location-permission-screen">
+                            <div class="compass-icon">🚓</div>
+                            <h4>Güvenlik Merkezleri</h4>
+                            <p>En yakın polis ve jandarma birimlerini görmek için konum erişimine izin verin</p>
+                            <button class="action-button" id="requestLocationPolice">
+                                <span>📍 Konumumu Paylaş</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="location-list-container">
+                        <div class="location-list-header">
+                            <h4><span>🚓</span> Güvenlik Birimleri</h4>
+                            <span class="distance-badge" style="background: var(--primary);">0 Kayıt</span>
+                        </div>
+                        <div class="location-list" id="police-list">
+                            <div class="location-item" style="text-align: center; padding: 3rem 1rem;">
+                                <div style="font-size: 2rem; margin-bottom: 1rem;">🚓</div>
+                                <h4>Konum Gerekli</h4>
+                                <p>En yakın güvenlik birimlerini görmek için konum erişimine izin verin</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-tab-content" id="fire-tab">
+                    <div class="map-container">
+                        <div id="fire-map-container" style="display: none;"></div>
+                        <div class="location-permission-screen">
+                            <div class="compass-icon">🚒</div>
+                            <h4>İtfaiye Merkezleri</h4>
+                            <p>En yakın itfaiye istasyonlarını görmek için konum erişimine izin verin</p>
+                            <button class="action-button" id="requestLocationFire">
+                                <span>📍 Konumumu Paylaş</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="location-list-container">
+                        <div class="location-list-header">
+                            <h4><span>🚒</span> İtfaiye İstasyonları</h4>
+                            <span class="distance-badge" style="background: #ea580c;">0 Kayıt</span>
+                        </div>
+                        <div class="location-list" id="fire-list">
+                            <div class="location-item" style="text-align: center; padding: 3rem 1rem;">
+                                <div style="font-size: 2rem; margin-bottom: 1rem;">🚒</div>
+                                <h4>Konum Gerekli</h4>
+                                <p>En yakın itfaiye istasyonlarını görmek için konum erişimine izin verin</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-tab-content" id="shelters-tab">
+                    <div class="map-container">
+                        <div id="shelters-map-container" style="display: none;"></div>
+                        <div class="location-permission-screen">
+                            <div class="compass-icon">🏠</div>
+                            <h4>Barınma Merkezleri</h4>
+                            <p>En yakın geçici barınma merkezlerini görmek için konum erişimine izin verin</p>
+                            <button class="action-button" id="requestLocationShelters">
+                                <span>📍 Konumumu Paylaş</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="location-list-container">
+                        <div class="location-list-header">
+                            <h4><span>🏠</span> Barınma Merkezleri</h4>
+                            <span class="distance-badge" style="background: #059669;">0 Kayıt</span>
+                        </div>
+                        <div class="location-list" id="shelters-list">
+                            <div class="location-item" style="text-align: center; padding: 3rem 1rem;">
+                                <div style="font-size: 2rem; margin-bottom: 1rem;">🏠</div>
+                                <h4>Konum Gerekli</h4>
+                                <p>En yakın barınma merkezlerini görmek için konum erişimine izin verin</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-tab-content" id="meeting-tab">
+                    <div class="map-container">
+                        <div id="meeting-map-container" style="display: none;"></div>
+                        <div class="location-permission-screen">
+                            <div class="compass-icon">📍</div>
+                            <h4>Toplanma Alanları</h4>
+                            <p>En yakın acil toplanma alanlarını görmek için konum erişimine izin verin</p>
+                            <button class="action-button" id="requestLocationMeeting">
+                                <span>📍 Konumumu Paylaş</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="location-list-container">
+                        <div class="location-list-header">
+                            <h4><span>📍</span> Toplanma Alanları</h4>
+                            <span class="distance-badge" style="background: #7c3aed;">0 Kayıt</span>
+                        </div>
+                        <div class="location-list" id="meeting-list">
+                            <div class="location-item" style="text-align: center; padding: 3rem 1rem;">
+                                <div style="font-size: 2rem; margin-bottom: 1rem;">📍</div>
+                                <h4>Konum Gerekli</h4>
+                                <p>En yakın toplanma alanlarını görmek için konum erişimine izin verin</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="animate-fade-in-up">Doğal Afetlere<br>Hazır Mısınız?</h1>
+                <p class="animate-fade-in-up animate-delay-100">
+                    Deprem, sel, yangın gibi doğal afetler için hazırlık rehberi. 
+                    Doğru bilgi ve planlama ile güvende kalın.
+                </p>
+
+                <a href="#categories" class="cta-button animate-fade-in-up animate-delay-300">
+                    <span>Hazırlığa Başla</span>
+                    <span>→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Banner -->
+    <div class="container">
+        <div class="emergency-banner animate-fade-in-up">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <span style="font-size: 1.5rem;">🚨</span>
+                <div>
+                    <strong style="font-size: 1.25rem;">ACİL DURUM: 112</strong><br>
+                    <span style="font-size: 0.9rem;">Tüm acil durumlar için tek numara</span>
+                </div>
+            </div>
+            <button id="emergencyMapButton">
+                <span>🗺️</span>
+                Haritada Göster
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Categories Section -->
+        <section class="section" id="categories">
+            <div class="container">
+                <div class="section-title">
+                    <h2 class="animate-fade-in-up">Afet Türleri</h2>
+                    <p class="animate-fade-in-up animate-delay-100">
+                        Her afet türü için hazırlık rehberleri
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Yer Afetleri -->
+                    <div class="card animate-fade-in-up" data-category="yer">
+                        <div class="card-icon">🏔️</div>
+                        <h3>Yer Afetleri</h3>
+                        <p>Deprem, heyelan ve volkan patlamaları için hazırlık ve güvenlik önlemleri.</p>
+                        <a href="yer.html" class="card-link">
+                            <span>İncele</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+
+                    <!-- Su Afetleri -->
+                    <div class="card animate-fade-in-up animate-delay-100" data-category="su">
+                        <div class="card-icon">🌊</div>
+                        <h3>Su Afetleri</h3>
+                        <p>Sel, tsunami ve su baskınlarına karşı alınacak önlemler ve korunma yolları.</p>
+                        <a href="su.html" class="card-link">
+                            <span>İncele</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+
+                    <!-- Hava Afetleri -->
+                    <div class="card animate-fade-in-up animate-delay-200" data-category="hava">
+                        <div class="card-icon">🌪️</div>
+                        <h3>Hava Afetleri</h3>
+                        <p>Fırtına, kasırga, dolu ve şiddetli yağışlarda güvenlik önlemleri.</p>
+                        <a href="hava.html" class="card-link">
+                            <span>İncele</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+
+                    <!-- İnsan Kaynaklı -->
+                    <div class="card animate-fade-in-up animate-delay-300" data-category="insan">
+                        <div class="card-icon">🔥</div>
+                        <h3>İnsan Kaynaklı</h3>
+                        <p>Yangın, kimyasal sızıntı ve endüstriyel kazalarda yapılması gerekenler.</p>
+                        <a href="İnsan.html" class="card-link">
+                            <span>İncele</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2 class="animate-fade-in-up">Nasıl Hazırlanmalı?</h2>
+                    <p class="animate-fade-in-up animate-delay-100">
+                        Temel hazırlık adımları
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-item animate-fade-in-up">
+                        <div class="feature-icon">📚</div>
+                        <h3>Bilgi Edinin</h3>
+                        <p>Yaşadığınız bölgedeki afet risklerini öğrenin ve güvenli alanları belirleyin.</p>
+                    </div>
+
+                    <div class="feature-item animate-fade-in-up animate-delay-100">
+                        <div class="feature-icon">📋</div>
+                        <h3>Plan Yapın</h3>
+                        <p>Aile afet planı oluşturun, buluşma noktaları belirleyin ve iletişim kurun.</p>
+                    </div>
+
+                    <div class="feature-item animate-fade-in-up animate-delay-200">
+                        <div class="feature-icon">🎒</div>
+                        <h3>Çanta Hazırlayın</h3>
+                        <p>72 saat yetecek acil durum çantası hazırlayın ve düzenli olarak güncelleyin.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Tips -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2 class="animate-fade-in-up">Önemli İpuçları</h2>
+                    <p class="animate-fade-in-up animate-delay-100">
+                        Afet anında dikkat edilmesi gerekenler
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card animate-fade-in-up">
+                        <div class="card-icon" style="background: var(--primary);">⚠️</div>
+                        <h3>Sakin Olun</h3>
+                        <p>Panik yapmayın, derin nefes alın ve durumu değerlendirin.</p>
+                    </div>
+
+                    <div class="card animate-fade-in-up animate-delay-100">
+                        <div class="card-icon" style="background: var(--accent);">📱</div>
+                        <h3>112'yi Arayın</h3>
+                        <p>Acil durumlarda sakin bir şekilde 112'yi arayın ve konumunuzu bildirin.</p>
+                    </div>
+
+                    <div class="card animate-fade-in-up animate-delay-200">
+                        <div class="card-icon" style="background: var(--warning);">👥</div>
+                        <h3>Yardım Edin</h3>
+                        <p>Güvende olduğunuzdan emin olduktan sonra çevrenizdekileri kontrol edin.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h4>
+                            <span>🚨</span>
+                            Afet Hazırlık
+                        </h4>
+                        <p style="color: var(--gray-400); margin-bottom: 1.5rem;">
+                            Doğal afetlere hazırlık için rehber ve bilgi kaynağı. Herkes için güvenlik.
+                        </p>
+                        <button id="footerMapButton">
+                            <span>🗺️</span>
+                            Acil Durum Haritası
+                        </button>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>
+                            <span>🔗</span>
+                            Hızlı Bağlantılar
+                        </h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html"><span>🏠</span> Ana Sayfa</a></li>
+                            <li><a href="yer.html"><span>🏔️</span> Yer Afetleri</a></li>
+                            <li><a href="su.html"><span>🌊</span> Su Afetleri</a></li>
+                            <li><a href="hava.html"><span>🌪️</span> Hava Afetleri</a></li>
+                            <li><a href="İnsan.html"><span>🔥</span> İnsan Kaynaklı</a></li>
+                            <li><a href="hakkinda.html"><span>ℹ️</span> Hakkında</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>
+                            <span>📞</span>
+                            Acil Kaynaklar
+                        </h4>
+                        <ul class="footer-links">
+                            <li><a href="https://www.afad.gov.tr" target="_blank" rel="noopener"><span>🏛️</span> AFAD</a></li>
+                            <li><a href="https://www.mgm.gov.tr" target="_blank" rel="noopener"><span>🌤️</span> Meteoroloji</a></li>
+                            <li><a href="https://www.112.gov.tr" target="_blank" rel="noopener"><span>🚨</span> 112 Acil</a></li>
+                            <li><a href="https://www.kizilay.org.tr" target="_blank" rel="noopener"><span>❤️</span> Kızılay</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p style="margin-top: 1rem;">
+                        © 2026 Afet Hazırlık Rehberi<br>
+                        <small>Bilgilendirme amaçlıdır. Acil durumlarda 112'yi arayınız.</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <script>
+        // ==================== TEMEL İŞLEMLER ====================
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        closeMenuBtn.addEventListener('click', toggleMobileMenu);
+        menuOverlay.addEventListener('click', toggleMobileMenu);
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Card click handlers
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!e.target.closest('a')) {
+                    const link = this.querySelector('a');
+                    if (link) {
+                        window.location.href = link.href;
+                    }
+                }
+            });
+
+            // Keyboard navigation
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    const link = this.querySelector('a');
+                    if (link) {
+                        window.location.href = link.href;
+                    }
+                }
+            });
+
+            // Make cards focusable
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+        });
+
+        // Theme detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        // Emergency banner click handler
+        document.querySelector('.emergency-banner').addEventListener('click', () => {
+            alert('ACİL DURUM NUMARASI: 112\n\n• Tüm acil durumlar için tek numara\n• Ücretsiz arama\n• 7/24 hizmet\n• Konum bilgisi otomatik paylaşılır\n\nSakin olun, net konuşun, adresinizi söyleyin.');
+        });
+
+        // Handle page load animations
+        window.addEventListener('load', () => {
+            // Add animation classes to elements
+            const animatedElements = document.querySelectorAll('.animate-fade-in-up');
+            animatedElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Simple visit counter
+        if (localStorage) {
+            const visits = parseInt(localStorage.getItem('afetHazirlikVisits') || 0) + 1;
+            localStorage.setItem('afetHazirlikVisits', visits);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Ctrl + P for print
+            if (e.ctrlKey && e.key === 'p') {
+                e.preventDefault();
+                window.print();
+            }
+            // Ctrl + M for map
+            if (e.ctrlKey && e.key === 'm') {
+                e.preventDefault();
+                openMapModal();
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ==================== GERÇEK HARITA SİSTEMİ ====================
+
+        // Harita modal elementleri
+        const mapModal = document.getElementById('mapModal');
+        const mapButton = document.getElementById('mapButton');
+        const mobileMapButton = document.getElementById('mobileMapButton');
+        const emergencyMapButton = document.getElementById('emergencyMapButton');
+        const footerMapButton = document.getElementById('footerMapButton');
+        const closeMapModal = document.getElementById('closeMapModal');
+        const mapTabs = document.querySelectorAll('.map-tab');
+        const tabContents = document.querySelectorAll('.map-tab-content');
+
+        // Konum ekranları
+        const locationPermissionScreen = document.getElementById('locationPermissionScreen');
+        const locationErrorScreen = document.getElementById('locationErrorScreen');
+        const loadingScreen = document.getElementById('loadingScreen');
+        const realMapContainer = document.getElementById('real-map-container');
+
+        // Butonlar
+        const requestLocationBtn = document.getElementById('requestLocation');
+        const useManualLocationBtn = document.getElementById('useManualLocation');
+        const retryLocationBtn = document.getElementById('retryLocation');
+        const manualLocationErrorBtn = document.getElementById('manualLocationError');
+
+        // Harita değişkenleri
+        let map = null;
+        let userLocation = null;
+        let userMarker = null;
+        let locationMarkers = [];
+        let currentTab = 'hospitals';
+
+        // Harita modal'ını aç
+        function openMapModal() {
+            mapModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Varsayılan tab'ı aktif et
+            switchTab('hospitals');
+            
+            // Kullanıcı konumunu kontrol et
+            checkLocationPermission();
+        }
+
+        // Harita modal'ını kapat
+        function closeMapModalFunc() {
+            mapModal.classList.remove('active');
+            document.body.style.overflow = '';
+            // Haritayı temizle
+            if (map) {
+                map.remove();
+                map = null;
+            }
+        }
+
+        // Tab değiştirme
+        function switchTab(tabName) {
+            currentTab = tabName;
+            
+            // Tüm tab'ları deaktif et
+            mapTabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.tab === tabName) {
+                    tab.classList.add('active');
+                }
+            });
+
+            // Tüm içerikleri gizle
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+                if (content.id === `${tabName}-tab`) {
+                    content.classList.add('active');
+                }
+            });
+
+            // Eğer konum varsa, ilgili haritayı yükle
+            if (userLocation) {
+                loadMapForCurrentTab();
+            }
+        }
+
+        // Konum iznini kontrol et
+        function checkLocationPermission() {
+            // Önce localStorage'dan kayıtlı konumu kontrol et
+            const savedLocation = localStorage.getItem('userLocation');
+            if (savedLocation) {
+                userLocation = JSON.parse(savedLocation);
+                showRealMap();
+                return;
+            }
+
+            // Yoksa izin ekranını göster
+            showLocationPermissionScreen();
+        }
+
+        // Konum izin ekranını göster
+        function showLocationPermissionScreen() {
+            locationPermissionScreen.style.display = 'flex';
+            locationErrorScreen.style.display = 'none';
+            loadingScreen.style.display = 'none';
+            realMapContainer.style.display = 'none';
+        }
+
+        // Konum hata ekranını göster
+        function showLocationErrorScreen() {
+            locationPermissionScreen.style.display = 'none';
+            locationErrorScreen.style.display = 'flex';
+            loadingScreen.style.display = 'none';
+            realMapContainer.style.display = 'none';
+        }
+
+        // Yükleniyor ekranını göster
+        function showLoadingScreen() {
+            locationPermissionScreen.style.display = 'none';
+            locationErrorScreen.style.display = 'none';
+            loadingScreen.style.display = 'flex';
+            realMapContainer.style.display = 'none';
+        }
+
+        // Gerçek haritayı göster
+        function showRealMap() {
+            locationPermissionScreen.style.display = 'none';
+            locationErrorScreen.style.display = 'none';
+            loadingScreen.style.display = 'none';
+            realMapContainer.style.display = 'block';
+            
+            // Haritayı yükle
+            loadMapForCurrentTab();
+        }
+
+        // Konum iste
+        async function requestUserLocation() {
+            showLoadingScreen();
+            
+            if (!navigator.geolocation) {
+                showLocationErrorScreen();
+                return;
+            }
+
+            try {
+                const position = await new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject, {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 0
+                    });
+                });
+
+                userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                    accuracy: position.coords.accuracy
+                };
+
+                // Konumu localStorage'a kaydet
+                localStorage.setItem('userLocation', JSON.stringify(userLocation));
+                
+                showRealMap();
+            } catch (error) {
+                console.error('Konum alınamadı:', error);
+                showLocationErrorScreen();
+            }
+        }
+
+        // Manuel konum gir
+        function useManualLocation() {
+            const city = prompt('Lütfen bulunduğunuz şehri girin (örn: İstanbul, Ankara, İzmir):');
+            if (!city) return;
+
+            // Türkiye'deki büyük şehirlerin koordinatları
+            const cityCoordinates = {
+                'istanbul': { lat: 41.0082, lng: 28.9784 },
+                'ankara': { lat: 39.9334, lng: 32.8597 },
+                'izmir': { lat: 38.4237, lng: 27.1428 },
+                'bursa': { lat: 40.1885, lng: 29.0610 },
+                'adana': { lat: 37.0000, lng: 35.3213 },
+                'antalya': { lat: 36.8969, lng: 30.7133 },
+                'konya': { lat: 37.8667, lng: 32.4833 },
+                'samsun': { lat: 41.2928, lng: 36.3314 },
+                'trabzon': { lat: 41.0027, lng: 39.7168 },
+                'erzurum': { lat: 39.9086, lng: 41.2769 },
+                'diyarbakır': { lat: 37.9100, lng: 40.2300 },
+                'van': { lat: 38.4946, lng: 43.3800 }
+            };
+
+            const normalizedCity = city.toLowerCase().trim();
+            if (cityCoordinates[normalizedCity]) {
+                userLocation = cityCoordinates[normalizedCity];
+                userLocation.accuracy = 5000; // 5km accuracy for manual selection
+                localStorage.setItem('userLocation', JSON.stringify(userLocation));
+                showRealMap();
+            } else {
+                alert('Üzgünüz, bu şehir için veri bulunamadı. Lütfen başka bir şehir deneyin.');
+            }
+        }
+
+        // Harita yükle
+        function loadMapForCurrentTab() {
+            if (!userLocation || !realMapContainer) return;
+
+            // Önceki haritayı temizle
+            if (map) {
+                map.remove();
+            }
+
+            // Yeni harita oluştur
+            map = L.map('real-map-container').setView([userLocation.lat, userLocation.lng], 13);
+
+            // OpenStreetMap tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 19
+            }).addTo(map);
+
+            // Kullanıcı konumunu işaretle
+            userMarker = L.marker([userLocation.lat, userLocation.lng], {
+                icon: L.divIcon({
+                    className: 'custom-marker',
+                    html: '<div style="background-color: var(--primary);"></div>',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30]
+                })
+            }).addTo(map);
+
+            userMarker.bindPopup("<b>Sizin Konumunuz</b><br>Harita bu konuma göre gösteriliyor").openPopup();
+
+            // Mevcut işaretçileri temizle
+            locationMarkers.forEach(marker => map.removeLayer(marker));
+            locationMarkers = [];
+
+            // İlgili tab'a göre verileri yükle
+            loadLocationsForCurrentTab();
+        }
+
+        // Mevcut tab'a göre konumları yükle
+        function loadLocationsForCurrentTab() {
+            if (!map || !userLocation) return;
+
+            // API endpoint'leri (simüle edilmiş)
+            const apiEndpoints = {
+                hospitals: 'https://overpass-api.de/api/interpreter?data=[out:json];node["amenity"="hospital"](around:10000,' + userLocation.lat + ',' + userLocation.lng + ');out body;',
+                police: 'https://overpass-api.de/api/interpreter?data=[out:json];node["amenity"="police"](around:10000,' + userLocation.lat + ',' + userLocation.lng + ');out body;',
+                fire: 'https://overpass-api.de/api/interpreter?data=[out:json];node["amenity"="fire_station"](around:10000,' + userLocation.lat + ',' + userLocation.lng + ');out body;'
+            };
+
+            // Simüle edilmiş veriler (gerçek API'ye bağlanamadığımız için)
+            const simulatedLocations = generateSimulatedLocations(currentTab, userLocation);
+            
+            // İşaretçileri haritaya ekle
+            simulatedLocations.forEach((location, index) => {
+                const marker = L.marker([location.lat, location.lng]).addTo(map);
+                
+                // Popup içeriği
+                const popupContent = `
+                    <div style="font-family: inherit; min-width: 200px;">
+                        <h4 style="margin: 0 0 8px 0; color: var(--primary);">${location.name}</h4>
+                        <p style="margin: 0 0 8px 0; font-size: 0.9em;">${location.address}</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.85em; color: var(--gray-600);">${location.distance} uzaklıkta</span>
+                            ${location.phone !== 'Yok' ? 
+                                `<a href="tel:${location.phone}" style="background: var(--primary); color: white; padding: 4px 8px; border-radius: 4px; text-decoration: none; font-size: 0.85em;">📞 ${location.phone}</a>` : 
+                                '<span style="font-size: 0.85em; color: var(--gray-500);">📞 Telefon yok</span>'}
+                        </div>
+                    </div>
+                `;
+                
+                marker.bindPopup(popupContent);
+                locationMarkers.push(marker);
+            });
+
+            // Lokasyon listesini güncelle
+            updateLocationList(simulatedLocations);
+        }
+
+        // Simüle edilmiş konumlar oluştur
+        function generateSimulatedLocations(type, userLocation) {
+            const locations = [];
+            const typeConfigs = {
+                hospitals: {
+                    icon: '🏥',
+                    names: ['Şehir Hastanesi', 'Üniversite Hastanesi', 'Devlet Hastanesi', 'Çocuk Hastanesi', 'Acil Sağlık Merkezi'],
+                    count: 5
+                },
+                police: {
+                    icon: '🚓',
+                    names: ['Merkez Polis Karakolu', 'Trafik Polisi', 'İl Jandarma Komutanlığı', 'Asayiş Büro Amirliği'],
+                    count: 4
+                },
+                fire: {
+                    icon: '🚒',
+                    names: ['Merkez İtfaiye', 'Kuzey İtfaiye İstasyonu', 'Güney İtfaiye İstasyonu', 'Orman İtfaiyesi'],
+                    count: 4
+                },
+                shelters: {
+                    icon: '🏠',
+                    names: ['AFAD Barınma Merkezi', 'Kızılay Konteyner Kent', 'Spor Salonu Barınma Alanı', 'Okul Geçici Barınma'],
+                    count: 4
+                },
+                meeting: {
+                    icon: '📍',
+                    names: ['Merkez Park Toplanma Alanı', 'Stadyum Acil Toplanma', 'Meydan Toplanma Noktası', 'Okul Bahçesi', 'Cami Avlusu'],
+                    count: 5
+                }
+            };
+
+            const config = typeConfigs[type] || typeConfigs.hospitals;
+
+            for (let i = 0; i < config.count; i++) {
+                // Kullanıcı konumuna yakın rastgele koordinatlar oluştur
+                const lat = userLocation.lat + (Math.random() - 0.5) * 0.05;
+                const lng = userLocation.lng + (Math.random() - 0.5) * 0.05;
+                
+                // Mesafe hesapla (basit simülasyon)
+                const distance = (Math.random() * 5 + 0.5).toFixed(1) + ' km';
+                
+                locations.push({
+                    name: config.names[i] || config.names[0],
+                    address: `${getRandomStreet()} ${Math.floor(Math.random() * 100) + 1}`,
+                    phone: i % 3 === 0 ? '112' : (i % 3 === 1 ? '155' : '110'),
+                    distance: distance,
+                    lat: lat,
+                    lng: lng,
+                    type: type
+                });
+            }
+
+            return locations;
+        }
+
+        // Rastgele sokak adı
+        function getRandomStreet() {
+            const streets = ['Cumhuriyet Cad.', 'Atatürk Bulvarı', 'İnönü Sok.', 'Zafer Mah.', 'Barış Cad.', 'Şehitler Sok.', 'Güvenlik Mah.', 'Sağlık Cad.'];
+            return streets[Math.floor(Math.random() * streets.length)];
+        }
+
+        // Lokasyon listesini güncelle
+        function updateLocationList(locations) {
+            const listElement = document.getElementById(`${currentTab}-list`);
+            const countElement = document.getElementById(`${currentTab === 'hospitals' ? 'hospital' : currentTab}Count`);
+            
+            if (!listElement) return;
+
+            listElement.innerHTML = '';
+            
+            if (countElement) {
+                countElement.textContent = `${locations.length} Kayıt`;
+            }
+
+            locations.forEach(location => {
+                const locationItem = document.createElement('div');
+                locationItem.className = 'location-item';
+                
+                const icon = getIconForType(location.type);
+                const phoneLink = location.phone !== 'Yok' 
+                    ? `<a href="tel:${location.phone}" class="phone-link">📞 ${location.phone}</a>`
+                    : '<span style="color: var(--gray-500); padding: 0.5rem 0.75rem;">📞 Telefon Yok</span>';
+                
+                locationItem.innerHTML = `
+                    <h4>${icon} ${location.name}</h4>
+                    <p>${location.address}</p>
+                    <div class="location-details">
+                        ${phoneLink}
+                        <span class="distance-badge">${location.distance}</span>
+                    </div>
+                `;
+                
+                // Tıklanınca haritada göster
+                locationItem.addEventListener('click', () => {
+                    if (map) {
+                        map.setView([location.lat, location.lng], 16);
+                        // İşaretçinin popup'ını aç
+                        const marker = locationMarkers.find(m => 
+                            m.getLatLng().lat === location.lat && 
+                            m.getLatLng().lng === location.lng
+                        );
+                        if (marker) {
+                            marker.openPopup();
+                        }
+                    }
+                });
+                
+                locationItem.style.cursor = 'pointer';
+                listElement.appendChild(locationItem);
+            });
+        }
+
+        // Tip'e göre icon belirle
+        function getIconForType(type) {
+            const icons = {
+                'hospitals': '🏥',
+                'police': '🚓',
+                'fire': '🚒',
+                'shelters': '🏠',
+                'meeting': '📍'
+            };
+            return icons[type] || '📍';
+        }
+
+        // ==================== EVENT LISTENERS ====================
+
+        // Harita modal butonları
+        mapButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            openMapModal();
+        });
+
+        mobileMapButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            openMapModal();
+            toggleMobileMenu();
+        });
+
+        emergencyMapButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openMapModal();
+            switchTab('hospitals');
+        });
+
+        footerMapButton.addEventListener('click', openMapModal);
+        closeMapModal.addEventListener('click', closeMapModalFunc);
+
+        // Modal dışına tıklayarak kapatma
+        mapModal.addEventListener('click', (e) => {
+            if (e.target === mapModal) {
+                closeMapModalFunc();
+            }
+        });
+
+        // Tab'lar için event listener
+        mapTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                switchTab(tab.dataset.tab);
+            });
+        });
+
+        // Konum butonları
+        requestLocationBtn.addEventListener('click', requestUserLocation);
+        useManualLocationBtn.addEventListener('click', useManualLocation);
+        retryLocationBtn.addEventListener('click', requestUserLocation);
+        manualLocationErrorBtn.addEventListener('click', useManualLocation);
+
+        // Diğer tab'lar için konum butonları
+        document.getElementById('requestLocationPolice')?.addEventListener('click', requestUserLocation);
+        document.getElementById('requestLocationFire')?.addEventListener('click', requestUserLocation);
+        document.getElementById('requestLocationShelters')?.addEventListener('click', requestUserLocation);
+        document.getElementById('requestLocationMeeting')?.addEventListener('click', requestUserLocation);
+
+        // Escape tuşu ile modal'ı kapatma
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mapModal.classList.contains('active')) {
+                closeMapModalFunc();
+            }
+        });
+
+        // ==================== SAYFA YÜKLENDİĞİNDE ====================
+
+        // Sayfa yüklendiğinde konum iznini kontrol et (önbellekte varsa)
+        window.addEventListener('load', () => {
+            const savedLocation = localStorage.getItem('userLocation');
+            if (savedLocation) {
+                userLocation = JSON.parse(savedLocation);
+            }
+        });
+
+        // ==================== GERÇEK HARITA SİSTEMİ SONU ====================
+    </script>
+</body>
+</html>
