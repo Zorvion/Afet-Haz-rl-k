@@ -1166,15 +1166,6 @@
             box-shadow: var(--shadow-md);
         }
 
-        .action-button.secondary {
-            background: var(--gray-200);
-            color: var(--gray-700);
-        }
-
-        .action-button.secondary:hover {
-            background: var(--gray-300);
-        }
-
         .location-list-container {
             flex: 0 0 300px;
             border-top: 1px solid var(--gray-200);
@@ -1678,7 +1669,7 @@
                     <button class="map-tab" data-tab="meeting">📍 Toplanma</button>
                 </div>
 
-                <!-- Konum İzin Ekranı (Varsayılan) -->
+                <!-- TÜM TAB'LAR İÇİN ORTAK HARITA ALANI -->
                 <div class="map-tab-content active" id="hospitals-tab">
                     <div class="map-container">
                         <div class="location-permission-screen" id="locationPermissionScreen">
@@ -1689,12 +1680,9 @@
                                 <button class="action-button" id="requestLocation">
                                     <span>📍 Konumumu Paylaş</span>
                                 </button>
-                                <button class="action-button secondary" id="useManualLocation">
-                                    <span>🔍 Manuel Konum Gir</span>
-                                </button>
                             </div>
                             <div class="map-instructions">
-                                <strong>ℹ️ Bilgi:</strong> Konum paylaşımını reddederseniz, harita özelliklerini kullanamazsınız. Manuel olarak bir şehir seçebilirsiniz.
+                                <strong>ℹ️ Bilgi:</strong> Konum paylaşımını reddederseniz, harita özelliklerini kullanamazsınız.
                             </div>
                         </div>
                         
@@ -1702,13 +1690,10 @@
                         <div class="location-error-screen" id="locationErrorScreen">
                             <div class="error-icon">❌</div>
                             <h4>Konum Erişimi Reddedildi</h4>
-                            <p>Harita özelliklerini kullanmak için konum erişimine izin vermeniz gerekiyor. Tarayıcı ayarlarınızdan konum iznini açabilir veya manuel konum girebilirsiniz.</p>
+                            <p>Harita özelliklerini kullanmak için konum erişimine izin vermeniz gerekiyor. Tarayıcı ayarlarınızdan konum iznini açabilirsiniz.</p>
                             <div class="map-actions">
                                 <button class="action-button" id="retryLocation">
                                     <span>🔄 Tekrar Dene</span>
-                                </button>
-                                <button class="action-button secondary" id="manualLocationError">
-                                    <span>🔍 Manuel Konum Gir</span>
                                 </button>
                             </div>
                         </div>
@@ -1727,20 +1712,20 @@
                     <!-- Lokasyon Listesi -->
                     <div class="location-list-container">
                         <div class="location-list-header">
-                            <h4><span>🏥</span> En Yakın Acil Servisler</h4>
-                            <span class="distance-badge" style="background: var(--accent);" id="hospitalCount">0 Kayıt</span>
+                            <h4><span id="tab-icon">🏥</span> <span id="tab-title">En Yakın Acil Servisler</span></h4>
+                            <span class="distance-badge" style="background: var(--accent);" id="locationCount">0 Kayıt</span>
                         </div>
-                        <div class="location-list" id="hospitals-list">
+                        <div class="location-list" id="locations-list">
                             <!-- Dinamik olarak JavaScript ile doldurulacak -->
                             <div class="location-item" style="text-align: center; padding: 3rem 1rem;">
                                 <div style="font-size: 2rem; margin-bottom: 1rem;">📍</div>
                                 <h4>Konum Gerekli</h4>
-                                <p>En yakın hastaneleri görmek için konum erişimine izin verin</p>
+                                <p>En yakın acil durum merkezlerini görmek için konum erişimine izin verin</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="map-legend">
+                    <div class="map-legend" id="map-legend">
                         <div class="map-legend-item">
                             <span class="legend-color hospital"></span>
                             <span>24 Saat Acil Servis</span>
@@ -1756,117 +1741,21 @@
                     </div>
                 </div>
 
-                <!-- Diğer Tab'lar (Başlangıçta boş) -->
+                <!-- Diğer Tab'lar (Tümü aynı haritayı paylaşıyor) -->
                 <div class="map-tab-content" id="police-tab">
-                    <div class="map-container">
-                        <div id="police-map-container" style="display: none;"></div>
-                        <div class="location-permission-screen">
-                            <div class="compass-icon">🚓</div>
-                            <h4>Güvenlik Merkezleri</h4>
-                            <p>En yakın polis ve jandarma birimlerini görmek için konum erişimine izin verin</p>
-                            <button class="action-button" id="requestLocationPolice">
-                                <span>📍 Konumumu Paylaş</span>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="location-list-container">
-                        <div class="location-list-header">
-                            <h4><span>🚓</span> Güvenlik Birimleri</h4>
-                            <span class="distance-badge" style="background: var(--primary);">0 Kayıt</span>
-                        </div>
-                        <div class="location-list" id="police-list">
-                            <div class="location-item" style="text-align: center; padding: 3rem 1rem;">
-                                <div style="font-size: 2rem; margin-bottom: 1rem;">🚓</div>
-                                <h4>Konum Gerekli</h4>
-                                <p>En yakın güvenlik birimlerini görmek için konum erişimine izin verin</p>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Aynı harita alanı kullanılacak -->
                 </div>
 
                 <div class="map-tab-content" id="fire-tab">
-                    <div class="map-container">
-                        <div id="fire-map-container" style="display: none;"></div>
-                        <div class="location-permission-screen">
-                            <div class="compass-icon">🚒</div>
-                            <h4>İtfaiye Merkezleri</h4>
-                            <p>En yakın itfaiye istasyonlarını görmek için konum erişimine izin verin</p>
-                            <button class="action-button" id="requestLocationFire">
-                                <span>📍 Konumumu Paylaş</span>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="location-list-container">
-                        <div class="location-list-header">
-                            <h4><span>🚒</span> İtfaiye İstasyonları</h4>
-                            <span class="distance-badge" style="background: #ea580c;">0 Kayıt</span>
-                        </div>
-                        <div class="location-list" id="fire-list">
-                            <div class="location-item" style="text-align: center; padding: 3rem 1rem;">
-                                <div style="font-size: 2rem; margin-bottom: 1rem;">🚒</div>
-                                <h4>Konum Gerekli</h4>
-                                <p>En yakın itfaiye istasyonlarını görmek için konum erişimine izin verin</p>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Aynı harita alanı kullanılacak -->
                 </div>
 
                 <div class="map-tab-content" id="shelters-tab">
-                    <div class="map-container">
-                        <div id="shelters-map-container" style="display: none;"></div>
-                        <div class="location-permission-screen">
-                            <div class="compass-icon">🏠</div>
-                            <h4>Barınma Merkezleri</h4>
-                            <p>En yakın geçici barınma merkezlerini görmek için konum erişimine izin verin</p>
-                            <button class="action-button" id="requestLocationShelters">
-                                <span>📍 Konumumu Paylaş</span>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="location-list-container">
-                        <div class="location-list-header">
-                            <h4><span>🏠</span> Barınma Merkezleri</h4>
-                            <span class="distance-badge" style="background: #059669;">0 Kayıt</span>
-                        </div>
-                        <div class="location-list" id="shelters-list">
-                            <div class="location-item" style="text-align: center; padding: 3rem 1rem;">
-                                <div style="font-size: 2rem; margin-bottom: 1rem;">🏠</div>
-                                <h4>Konum Gerekli</h4>
-                                <p>En yakın barınma merkezlerini görmek için konum erişimine izin verin</p>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Aynı harita alanı kullanılacak -->
                 </div>
 
                 <div class="map-tab-content" id="meeting-tab">
-                    <div class="map-container">
-                        <div id="meeting-map-container" style="display: none;"></div>
-                        <div class="location-permission-screen">
-                            <div class="compass-icon">📍</div>
-                            <h4>Toplanma Alanları</h4>
-                            <p>En yakın acil toplanma alanlarını görmek için konum erişimine izin verin</p>
-                            <button class="action-button" id="requestLocationMeeting">
-                                <span>📍 Konumumu Paylaş</span>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="location-list-container">
-                        <div class="location-list-header">
-                            <h4><span>📍</span> Toplanma Alanları</h4>
-                            <span class="distance-badge" style="background: #7c3aed;">0 Kayıt</span>
-                        </div>
-                        <div class="location-list" id="meeting-list">
-                            <div class="location-item" style="text-align: center; padding: 3rem 1rem;">
-                                <div style="font-size: 2rem; margin-bottom: 1rem;">📍</div>
-                                <h4>Konum Gerekli</h4>
-                                <p>En yakın toplanma alanlarını görmek için konum erişimine izin verin</p>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Aynı harita alanı kullanılacak -->
                 </div>
             </div>
         </div>
@@ -2206,7 +2095,7 @@
             });
         });
 
-        // ==================== GERÇEK HARITA SİSTEMİ ====================
+        // ==================== GERÇEK HARITA SİSTEMİ - TÜM TAB'LAR ÇALIŞACAK ====================
 
         // Harita modal elementleri
         const mapModal = document.getElementById('mapModal');
@@ -2226,9 +2115,14 @@
 
         // Butonlar
         const requestLocationBtn = document.getElementById('requestLocation');
-        const useManualLocationBtn = document.getElementById('useManualLocation');
         const retryLocationBtn = document.getElementById('retryLocation');
-        const manualLocationErrorBtn = document.getElementById('manualLocationError');
+
+        // Harita ve liste elementleri
+        const tabIcon = document.getElementById('tab-icon');
+        const tabTitle = document.getElementById('tab-title');
+        const locationCount = document.getElementById('locationCount');
+        const locationsList = document.getElementById('locations-list');
+        const mapLegend = document.getElementById('map-legend');
 
         // Harita değişkenleri
         let map = null;
@@ -2236,6 +2130,45 @@
         let userMarker = null;
         let locationMarkers = [];
         let currentTab = 'hospitals';
+
+        // Tab bilgileri
+        const tabInfo = {
+            hospitals: {
+                icon: '🏥',
+                title: 'En Yakın Acil Servisler',
+                color: '#dc2626',
+                places: ['hospital', 'clinic', 'health_center'],
+                names: ['Şehir Hastanesi', 'Üniversite Hastanesi', 'Devlet Hastanesi', 'Çocuk Hastanesi', 'Acil Sağlık Merkezi']
+            },
+            police: {
+                icon: '🚓',
+                title: 'Güvenlik Birimleri',
+                color: '#2563eb',
+                places: ['police', 'police_station', 'police_box'],
+                names: ['Merkez Polis Karakolu', 'Trafik Polisi', 'İl Jandarma Komutanlığı', 'Asayiş Büro Amirliği']
+            },
+            fire: {
+                icon: '🚒',
+                title: 'İtfaiye İstasyonları',
+                color: '#ea580c',
+                places: ['fire_station', 'fire_department'],
+                names: ['Merkez İtfaiye', 'Kuzey İtfaiye İstasyonu', 'Güney İtfaiye İstasyonu', 'Orman İtfaiyesi']
+            },
+            shelters: {
+                icon: '🏠',
+                title: 'Barınma Merkezleri',
+                color: '#059669',
+                places: ['shelter', 'community_center', 'school'],
+                names: ['AFAD Barınma Merkezi', 'Kızılay Konteyner Kent', 'Spor Salonu Barınma Alanı', 'Okul Geçici Barınma']
+            },
+            meeting: {
+                icon: '📍',
+                title: 'Toplanma Alanları',
+                color: '#7c3aed',
+                places: ['park', 'stadium', 'square'],
+                names: ['Merkez Park Toplanma Alanı', 'Stadyum Acil Toplanma', 'Meydan Toplanma Noktası', 'Okul Bahçesi', 'Cami Avlusu']
+            }
+        };
 
         // Harita modal'ını aç
         function openMapModal() {
@@ -2279,9 +2212,22 @@
                 }
             });
 
+            // Tab bilgilerini güncelle
+            updateTabInfo();
+
             // Eğer konum varsa, ilgili haritayı yükle
             if (userLocation) {
-                loadMapForCurrentTab();
+                loadLocationsForCurrentTab();
+            }
+        }
+
+        // Tab bilgilerini güncelle
+        function updateTabInfo() {
+            const info = tabInfo[currentTab];
+            if (info) {
+                tabIcon.textContent = info.icon;
+                tabTitle.textContent = info.title;
+                locationCount.style.backgroundColor = info.color;
             }
         }
 
@@ -2305,6 +2251,7 @@
             locationErrorScreen.style.display = 'none';
             loadingScreen.style.display = 'none';
             realMapContainer.style.display = 'none';
+            updateTabInfo();
         }
 
         // Konum hata ekranını göster
@@ -2331,7 +2278,7 @@
             realMapContainer.style.display = 'block';
             
             // Haritayı yükle
-            loadMapForCurrentTab();
+            loadMap();
         }
 
         // Konum iste
@@ -2368,45 +2315,15 @@
             }
         }
 
-        // Manuel konum gir
-        function useManualLocation() {
-            const city = prompt('Lütfen bulunduğunuz şehri girin (örn: İstanbul, Ankara, İzmir):');
-            if (!city) return;
-
-            // Türkiye'deki büyük şehirlerin koordinatları
-            const cityCoordinates = {
-                'istanbul': { lat: 41.0082, lng: 28.9784 },
-                'ankara': { lat: 39.9334, lng: 32.8597 },
-                'izmir': { lat: 38.4237, lng: 27.1428 },
-                'bursa': { lat: 40.1885, lng: 29.0610 },
-                'adana': { lat: 37.0000, lng: 35.3213 },
-                'antalya': { lat: 36.8969, lng: 30.7133 },
-                'konya': { lat: 37.8667, lng: 32.4833 },
-                'samsun': { lat: 41.2928, lng: 36.3314 },
-                'trabzon': { lat: 41.0027, lng: 39.7168 },
-                'erzurum': { lat: 39.9086, lng: 41.2769 },
-                'diyarbakır': { lat: 37.9100, lng: 40.2300 },
-                'van': { lat: 38.4946, lng: 43.3800 }
-            };
-
-            const normalizedCity = city.toLowerCase().trim();
-            if (cityCoordinates[normalizedCity]) {
-                userLocation = cityCoordinates[normalizedCity];
-                userLocation.accuracy = 5000; // 5km accuracy for manual selection
-                localStorage.setItem('userLocation', JSON.stringify(userLocation));
-                showRealMap();
-            } else {
-                alert('Üzgünüz, bu şehir için veri bulunamadı. Lütfen başka bir şehir deneyin.');
-            }
-        }
-
         // Harita yükle
-        function loadMapForCurrentTab() {
+        function loadMap() {
             if (!userLocation || !realMapContainer) return;
 
             // Önceki haritayı temizle
             if (map) {
                 map.remove();
+                locationMarkers.forEach(marker => map.removeLayer(marker));
+                locationMarkers = [];
             }
 
             // Yeni harita oluştur
@@ -2430,31 +2347,31 @@
 
             userMarker.bindPopup("<b>Sizin Konumunuz</b><br>Harita bu konuma göre gösteriliyor").openPopup();
 
-            // Mevcut işaretçileri temizle
-            locationMarkers.forEach(marker => map.removeLayer(marker));
-            locationMarkers = [];
-
-            // İlgili tab'a göre verileri yükle
+            // Mevcut tab için konumları yükle
             loadLocationsForCurrentTab();
         }
 
-        // Mevcut tab'a göre konumları yükle
+        // Mevcut tab için konumları yükle
         function loadLocationsForCurrentTab() {
             if (!map || !userLocation) return;
 
-            // API endpoint'leri (simüle edilmiş)
-            const apiEndpoints = {
-                hospitals: 'https://overpass-api.de/api/interpreter?data=[out:json];node["amenity"="hospital"](around:10000,' + userLocation.lat + ',' + userLocation.lng + ');out body;',
-                police: 'https://overpass-api.de/api/interpreter?data=[out:json];node["amenity"="police"](around:10000,' + userLocation.lat + ',' + userLocation.lng + ');out body;',
-                fire: 'https://overpass-api.de/api/interpreter?data=[out:json];node["amenity"="fire_station"](around:10000,' + userLocation.lat + ',' + userLocation.lng + ');out body;'
-            };
+            // Önceki işaretçileri temizle
+            locationMarkers.forEach(marker => map.removeLayer(marker));
+            locationMarkers = [];
 
-            // Simüle edilmiş veriler (gerçek API'ye bağlanamadığımız için)
-            const simulatedLocations = generateSimulatedLocations(currentTab, userLocation);
+            // Simüle edilmiş veriler (Google Maps API'si için demo)
+            const simulatedLocations = generateSimulatedLocationsForTab(currentTab, userLocation);
             
             // İşaretçileri haritaya ekle
             simulatedLocations.forEach((location, index) => {
-                const marker = L.marker([location.lat, location.lng]).addTo(map);
+                const marker = L.marker([location.lat, location.lng], {
+                    icon: L.divIcon({
+                        className: 'custom-marker',
+                        html: `<div style="background-color: ${tabInfo[currentTab].color};"></div>`,
+                        iconSize: [25, 25],
+                        iconAnchor: [12, 25]
+                    })
+                }).addTo(map);
                 
                 // Popup içeriği
                 const popupContent = `
@@ -2478,40 +2395,15 @@
             updateLocationList(simulatedLocations);
         }
 
-        // Simüle edilmiş konumlar oluştur
-        function generateSimulatedLocations(type, userLocation) {
+        // Her tab için simüle edilmiş konumlar oluştur
+        function generateSimulatedLocationsForTab(tab, userLocation) {
+            const info = tabInfo[tab];
+            if (!info) return [];
+
             const locations = [];
-            const typeConfigs = {
-                hospitals: {
-                    icon: '🏥',
-                    names: ['Şehir Hastanesi', 'Üniversite Hastanesi', 'Devlet Hastanesi', 'Çocuk Hastanesi', 'Acil Sağlık Merkezi'],
-                    count: 5
-                },
-                police: {
-                    icon: '🚓',
-                    names: ['Merkez Polis Karakolu', 'Trafik Polisi', 'İl Jandarma Komutanlığı', 'Asayiş Büro Amirliği'],
-                    count: 4
-                },
-                fire: {
-                    icon: '🚒',
-                    names: ['Merkez İtfaiye', 'Kuzey İtfaiye İstasyonu', 'Güney İtfaiye İstasyonu', 'Orman İtfaiyesi'],
-                    count: 4
-                },
-                shelters: {
-                    icon: '🏠',
-                    names: ['AFAD Barınma Merkezi', 'Kızılay Konteyner Kent', 'Spor Salonu Barınma Alanı', 'Okul Geçici Barınma'],
-                    count: 4
-                },
-                meeting: {
-                    icon: '📍',
-                    names: ['Merkez Park Toplanma Alanı', 'Stadyum Acil Toplanma', 'Meydan Toplanma Noktası', 'Okul Bahçesi', 'Cami Avlusu'],
-                    count: 5
-                }
-            };
+            const count = info.names.length;
 
-            const config = typeConfigs[type] || typeConfigs.hospitals;
-
-            for (let i = 0; i < config.count; i++) {
+            for (let i = 0; i < count; i++) {
                 // Kullanıcı konumuna yakın rastgele koordinatlar oluştur
                 const lat = userLocation.lat + (Math.random() - 0.5) * 0.05;
                 const lng = userLocation.lng + (Math.random() - 0.5) * 0.05;
@@ -2519,14 +2411,21 @@
                 // Mesafe hesapla (basit simülasyon)
                 const distance = (Math.random() * 5 + 0.5).toFixed(1) + ' km';
                 
+                // Telefon numarası
+                let phone = 'Yok';
+                if (tab === 'hospitals') phone = '112';
+                else if (tab === 'police') phone = '155';
+                else if (tab === 'fire') phone = '110';
+                else if (tab === 'shelters') phone = '1222';
+                
                 locations.push({
-                    name: config.names[i] || config.names[0],
+                    name: info.names[i],
                     address: `${getRandomStreet()} ${Math.floor(Math.random() * 100) + 1}`,
-                    phone: i % 3 === 0 ? '112' : (i % 3 === 1 ? '155' : '110'),
+                    phone: phone,
                     distance: distance,
                     lat: lat,
                     lng: lng,
-                    type: type
+                    type: tab
                 });
             }
 
@@ -2541,22 +2440,34 @@
 
         // Lokasyon listesini güncelle
         function updateLocationList(locations) {
-            const listElement = document.getElementById(`${currentTab}-list`);
-            const countElement = document.getElementById(`${currentTab === 'hospitals' ? 'hospital' : currentTab}Count`);
-            
-            if (!listElement) return;
+            if (!locationsList) return;
 
-            listElement.innerHTML = '';
+            locationsList.innerHTML = '';
             
-            if (countElement) {
-                countElement.textContent = `${locations.length} Kayıt`;
+            if (locationCount) {
+                locationCount.textContent = `${locations.length} Kayıt`;
+            }
+
+            // Eğer konum yoksa mesaj göster
+            if (locations.length === 0) {
+                const emptyMessage = document.createElement('div');
+                emptyMessage.className = 'location-item';
+                emptyMessage.style.textAlign = 'center';
+                emptyMessage.style.padding = '3rem 1rem';
+                emptyMessage.innerHTML = `
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">${tabInfo[currentTab]?.icon || '📍'}</div>
+                    <h4>${tabInfo[currentTab]?.title || 'Konumlar'}</h4>
+                    <p>Bu bölgede kayıtlı ${tabInfo[currentTab]?.title?.toLowerCase() || 'konum'} bulunamadı</p>
+                `;
+                locationsList.appendChild(emptyMessage);
+                return;
             }
 
             locations.forEach(location => {
                 const locationItem = document.createElement('div');
                 locationItem.className = 'location-item';
                 
-                const icon = getIconForType(location.type);
+                const icon = tabInfo[currentTab]?.icon || '📍';
                 const phoneLink = location.phone !== 'Yok' 
                     ? `<a href="tel:${location.phone}" class="phone-link">📞 ${location.phone}</a>`
                     : '<span style="color: var(--gray-500); padding: 0.5rem 0.75rem;">📞 Telefon Yok</span>';
@@ -2586,20 +2497,103 @@
                 });
                 
                 locationItem.style.cursor = 'pointer';
-                listElement.appendChild(locationItem);
+                locationsList.appendChild(locationItem);
             });
         }
 
-        // Tip'e göre icon belirle
-        function getIconForType(type) {
-            const icons = {
-                'hospitals': '🏥',
-                'police': '🚓',
-                'fire': '🚒',
-                'shelters': '🏠',
-                'meeting': '📍'
-            };
-            return icons[type] || '📍';
+        // Lejantı güncelle
+        function updateLegend() {
+            if (!mapLegend) return;
+
+            const info = tabInfo[currentTab];
+            if (!info) return;
+
+            let legendHTML = '';
+            
+            switch(currentTab) {
+                case 'hospitals':
+                    legendHTML = `
+                        <div class="map-legend-item">
+                            <span class="legend-color hospital"></span>
+                            <span>24 Saat Acil Servis</span>
+                        </div>
+                        <div class="map-legend-item">
+                            <span class="legend-color police"></span>
+                            <span>Poliklinik Hizmeti</span>
+                        </div>
+                        <div class="map-legend-item">
+                            <span class="legend-color meeting"></span>
+                            <span>Ambulans Servisi</span>
+                        </div>
+                    `;
+                    break;
+                case 'police':
+                    legendHTML = `
+                        <div class="map-legend-item">
+                            <span class="legend-color police"></span>
+                            <span>Polis Merkezi</span>
+                        </div>
+                        <div class="map-legend-item">
+                            <span class="legend-color hospital"></span>
+                            <span>Jandarma Karakolu</span>
+                        </div>
+                        <div class="map-legend-item">
+                            <span class="legend-color fire"></span>
+                            <span>Güvenlik Noktası</span>
+                        </div>
+                    `;
+                    break;
+                case 'fire':
+                    legendHTML = `
+                        <div class="map-legend-item">
+                            <span class="legend-color fire"></span>
+                            <span>İtfaiye İstasyonu</span>
+                        </div>
+                        <div class="map-legend-item">
+                            <span class="legend-color hospital"></span>
+                            <span>Yangın Söndürme Merkezi</span>
+                        </div>
+                        <div class="map-legend-item">
+                            <span class="legend-color police"></span>
+                            <span>Orman İtfaiyesi</span>
+                        </div>
+                    `;
+                    break;
+                case 'shelters':
+                    legendHTML = `
+                        <div class="map-legend-item">
+                            <span class="legend-color shelter"></span>
+                            <span>AFAD Barınma Merkezi</span>
+                        </div>
+                        <div class="map-legend-item">
+                            <span class="legend-color meeting"></span>
+                            <span>Kızılay Konteyner Kent</span>
+                        </div>
+                        <div class="map-legend-item">
+                            <span class="legend-color hospital"></span>
+                            <span>Geçici Yardım Merkezi</span>
+                        </div>
+                    `;
+                    break;
+                case 'meeting':
+                    legendHTML = `
+                        <div class="map-legend-item">
+                            <span class="legend-color meeting"></span>
+                            <span>Acil Toplanma Alanı</span>
+                        </div>
+                        <div class="map-legend-item">
+                            <span class="legend-color shelter"></span>
+                            <span>Geçici Barınma</span>
+                        </div>
+                        <div class="map-legend-item">
+                            <span class="legend-color police"></span>
+                            <span>Yardım Dağıtım Noktası</span>
+                        </div>
+                    `;
+                    break;
+            }
+
+            mapLegend.innerHTML = legendHTML;
         }
 
         // ==================== EVENT LISTENERS ====================
@@ -2642,15 +2636,7 @@
 
         // Konum butonları
         requestLocationBtn.addEventListener('click', requestUserLocation);
-        useManualLocationBtn.addEventListener('click', useManualLocation);
         retryLocationBtn.addEventListener('click', requestUserLocation);
-        manualLocationErrorBtn.addEventListener('click', useManualLocation);
-
-        // Diğer tab'lar için konum butonları
-        document.getElementById('requestLocationPolice')?.addEventListener('click', requestUserLocation);
-        document.getElementById('requestLocationFire')?.addEventListener('click', requestUserLocation);
-        document.getElementById('requestLocationShelters')?.addEventListener('click', requestUserLocation);
-        document.getElementById('requestLocationMeeting')?.addEventListener('click', requestUserLocation);
 
         // Escape tuşu ile modal'ı kapatma
         document.addEventListener('keydown', (e) => {
