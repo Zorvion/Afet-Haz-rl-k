@@ -218,100 +218,52 @@
                 background: #475569 !important;
             }
 
-            /* Harita Modal için koyu tema stilleri */
-            .map-modal-content {
+            /* İlk Yardım Modal için koyu tema stilleri */
+            .firstaid-modal-content {
                 background-color: #1e293b !important;
                 border-color: #334155 !important;
             }
 
-            .map-modal-header {
+            .firstaid-modal-header {
                 border-bottom-color: #334155 !important;
-                background: linear-gradient(135deg, #0d9488, #115e59) !important;
+                background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
             }
 
-            .map-tab {
+            .firstaid-tab {
                 background-color: #334155 !important;
                 color: #cbd5e1 !important;
             }
 
-            .map-tab:hover {
+            .firstaid-tab:hover {
                 background-color: #475569 !important;
             }
 
-            .map-tab.active {
-                background-color: #14b8a6 !important;
+            .firstaid-tab.active {
+                background-color: #dc2626 !important;
                 color: white !important;
-                border-bottom: 3px solid #5eead4 !important;
+                border-bottom: 3px solid #f87171 !important;
             }
 
-            .location-item {
+            .firstaid-step-card {
                 background-color: #334155 !important;
                 border-color: #475569 !important;
             }
 
-            .location-item:hover {
+            .firstaid-step-card:hover {
                 background-color: #475569 !important;
-                border-color: #5eead4 !important;
+                border-color: #f87171 !important;
             }
 
-            .location-item h4 {
+            .firstaid-step-card h4 {
                 color: #f1f5f9 !important;
             }
 
-            .location-item p {
+            .firstaid-step-card p {
                 color: #cbd5e1 !important;
             }
 
-            .distance-badge {
-                background-color: #475569 !important;
-                color: #e2e8f0 !important;
-            }
-
-            .map-legend-item {
+            .firstaid-tab-content {
                 color: #cbd5e1 !important;
-            }
-
-            .location-list-header {
-                background-color: #334155 !important;
-                border-bottom-color: #475569 !important;
-            }
-
-            .location-list-header h4 {
-                color: #f1f5f9 !important;
-            }
-
-            .map-instructions {
-                background-color: #334155 !important;
-                border-left-color: #14b8a6 !important;
-                color: #cbd5e1 !important;
-            }
-
-            .phone-link {
-                background: rgba(20, 184, 166, 0.15) !important;
-                color: #5eead4 !important;
-            }
-
-            .phone-link:hover {
-                background: rgba(20, 184, 166, 0.25) !important;
-            }
-
-            /* Leaflet harita için koyu tema uyumu */
-            .leaflet-container {
-                background: #1e293b !important;
-            }
-            
-            .leaflet-control-attribution {
-                background-color: rgba(30, 41, 59, 0.8) !important;
-                color: #cbd5e1 !important;
-            }
-            
-            .leaflet-popup-content {
-                background-color: #1e293b !important;
-                color: #e2e8f0 !important;
-            }
-            
-            .leaflet-popup-tip {
-                background-color: #1e293b !important;
             }
         }
 
@@ -466,17 +418,17 @@
             color: var(--white);
         }
 
-        /* Harita Butonu */
-        .nav-link.map-button {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        /* İlk Yardım Butonu */
+        .nav-link.firstaid-button {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
             color: white;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .nav-link.map-button:hover {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        .nav-link.firstaid-button:hover {
+            background: linear-gradient(135deg, var(--accent), #b91c1c);
             transform: translateY(-2px);
             box-shadow: var(--shadow-md);
         }
@@ -897,9 +849,9 @@
             color: var(--white);
         }
 
-        /* Harita butonu mobile menüye eklendi */
-        .mobile-menu-link.map-button {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        /* İlk yardım butonu mobile menüye eklendi */
+        .mobile-menu-link.firstaid-button {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
             color: white;
             display: flex;
             align-items: center;
@@ -925,8 +877,8 @@
             visibility: visible;
         }
 
-        /* Harita Modal Stilleri - GERÇEK HARITA İÇİN */
-        .map-modal {
+        /* İLK YARDIM MODAL STİLLERİ */
+        .firstaid-modal {
             position: fixed;
             top: 0;
             left: 0;
@@ -940,21 +892,21 @@
             opacity: 0;
             visibility: hidden;
             transition: var(--transition-normal);
-            padding: 0;
+            padding: 1rem;
         }
 
-        .map-modal.active {
+        .firstaid-modal.active {
             opacity: 1;
             visibility: visible;
         }
 
-        .map-modal-content {
+        .firstaid-modal-content {
             background: var(--white);
             border-radius: var(--radius-xl);
             width: 100%;
-            height: 100%;
-            max-height: 100vh;
-            max-width: 100vw;
+            height: 90%;
+            max-height: 90vh;
+            max-width: 1000px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -962,17 +914,17 @@
             border: none;
         }
 
-        .map-modal-header {
+        .firstaid-modal-header {
             padding: 1.5rem 2rem;
             border-bottom: 1px solid var(--gray-200);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(135deg, var(--accent), #b91c1c);
             color: white;
         }
 
-        .map-modal-header h3 {
+        .firstaid-modal-header h3 {
             color: white;
             margin: 0;
             display: flex;
@@ -1001,22 +953,24 @@
             transform: rotate(90deg);
         }
 
-        .map-modal-body {
+        .firstaid-modal-body {
             display: flex;
             flex-direction: column;
             height: 100%;
             overflow: hidden;
         }
 
-        .map-tabs {
+        .firstaid-tabs {
             display: flex;
             border-bottom: 1px solid var(--gray-200);
             background: var(--gray-50);
             flex-shrink: 0;
+            overflow-x: auto;
         }
 
-        .map-tab {
+        .firstaid-tab {
             flex: 1;
+            min-width: 150px;
             padding: 1.25rem 1.5rem;
             border: none;
             background: none;
@@ -1031,337 +985,135 @@
             gap: 0.75rem;
             font-size: 1rem;
             position: relative;
+            white-space: nowrap;
         }
 
-        .map-tab:hover {
+        .firstaid-tab:hover {
             background: var(--gray-100);
         }
 
-        .map-tab.active {
-            color: var(--primary);
-            border-bottom: 3px solid var(--primary);
+        .firstaid-tab.active {
+            color: var(--accent);
+            border-bottom: 3px solid var(--accent);
             background: var(--white);
         }
 
-        .map-tab-content {
+        .firstaid-tab-content {
             flex: 1;
-            overflow: hidden;
-            padding: 0;
+            overflow-y: auto;
+            padding: 2rem;
             display: none;
-            flex-direction: column;
-        }
-
-        .map-tab-content.active {
-            display: flex;
             animation: fadeInUp 0.3s ease-out;
         }
 
-        /* GERÇEK HARITA KONTEYNERİ */
-        #real-map-container {
-            flex: 1;
-            width: 100%;
-            min-height: 400px;
-            overflow: hidden;
-            position: relative;
-            border: none;
+        .firstaid-tab-content.active {
+            display: block;
         }
 
-        .map-container {
-            flex: 1;
-            width: 100%;
-            min-height: 400px;
-            overflow: hidden;
-            position: relative;
-            border: none;
-        }
-
-        /* Konum isteme ekranı */
-        .location-permission-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            padding: 3rem;
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary-soft), var(--white));
-        }
-
-        .location-permission-screen .compass-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-            animation: rotateSlow 20s linear infinite;
-        }
-
-        .location-permission-screen h4 {
-            font-size: 1.75rem;
-            margin-bottom: 1rem;
-            color: var(--gray-800);
-        }
-
-        .location-permission-screen p {
-            font-size: 1.1rem;
-            max-width: 500px;
-            margin-bottom: 2rem;
-            color: var(--gray-600);
-        }
-
-        .location-error-screen {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            padding: 3rem;
-            text-align: center;
-            background: linear-gradient(135deg, #fee2e2, var(--white));
-        }
-
-        .location-error-screen .error-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent);
-        }
-
-        .location-error-screen h4 {
-            font-size: 1.75rem;
-            margin-bottom: 1rem;
-            color: var(--gray-800);
-        }
-
-        .location-error-screen p {
-            font-size: 1.1rem;
-            max-width: 500px;
-            margin-bottom: 2rem;
-            color: var(--gray-600);
-        }
-
-        .map-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            justify-content: center;
-        }
-
-        .action-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--primary);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-lg);
-            border: none;
-            font-family: inherit;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: var(--transition-fast);
-        }
-
-        .action-button:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .location-list-container {
-            flex: 0 0 300px;
-            border-top: 1px solid var(--gray-200);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .location-list-header {
-            padding: 1rem 1.5rem;
-            background: var(--gray-50);
-            border-bottom: 1px solid var(--gray-200);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .location-list-header h4 {
-            margin: 0;
-            color: var(--gray-900);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .location-list {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1.5rem;
-        }
-
-        .location-item {
+        /* İlk Yardım İçerik Stilleri */
+        .firstaid-step-card {
             background: var(--gray-50);
             border: 1px solid var(--gray-200);
             border-radius: var(--radius-lg);
-            padding: 1.25rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             transition: var(--transition-fast);
-            margin-bottom: 1rem;
         }
 
-        .location-item:hover {
+        .firstaid-step-card:hover {
             transform: translateX(4px);
-            border-color: var(--primary-light);
-            background: var(--gray-100);
+            border-color: var(--accent-light);
             box-shadow: var(--shadow-md);
         }
 
-        .location-item:last-child {
+        .firstaid-step-card:last-child {
             margin-bottom: 0;
         }
 
-        .location-item h4 {
+        .firstaid-step-card h4 {
             color: var(--gray-900);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        .firstaid-step-card p {
+            font-size: 1rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .firstaid-warning {
+            background: linear-gradient(135deg, #fef3c7, #fef3c7);
+            border-left: 4px solid var(--warning);
+            padding: 1.25rem;
+            border-radius: var(--radius-md);
+            margin: 1.5rem 0;
+        }
+
+        .firstaid-warning h5 {
+            color: var(--warning);
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 1.1rem;
         }
 
-        .location-item p {
-            font-size: 0.95rem;
-            color: var(--gray-600);
+        .firstaid-tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .firstaid-tip {
+            background: linear-gradient(135deg, var(--primary-soft), var(--white));
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            border: 1px solid var(--primary-light);
+        }
+
+        .firstaid-tip h5 {
+            color: var(--primary-dark);
             margin-bottom: 0.75rem;
-            line-height: 1.4;
-        }
-
-        .location-details {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.875rem;
-        }
-
-        .distance-badge {
-            background: var(--primary-light);
-            color: white;
-            padding: 0.35rem 0.85rem;
-            border-radius: 1rem;
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-
-        .phone-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 0.75rem;
-            background: rgba(15, 118, 110, 0.1);
-            border-radius: var(--radius-md);
+        }
+
+        .emergency-numbers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .emergency-number {
+            background: var(--gray-100);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            text-align: center;
             transition: var(--transition-fast);
         }
 
-        .phone-link:hover {
-            text-decoration: none;
-            background: rgba(15, 118, 110, 0.2);
-            transform: translateY(-1px);
+        .emergency-number:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
         }
 
-        .map-legend {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            padding: 1rem 1.5rem;
-            border-top: 1px solid var(--gray-200);
-            background: var(--gray-50);
+        .emergency-number .number {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
         }
 
-        .map-legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 0.9rem;
-            color: var(--gray-600);
-        }
-
-        .legend-color {
-            width: 1rem;
-            height: 1rem;
-            border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .legend-color.hospital { background-color: #dc2626; }
-        .legend-color.police { background-color: #2563eb; }
-        .legend-color.fire { background-color: #ea580c; }
-        .legend-color.shelter { background-color: #059669; }
-        .legend-color.meeting { background-color: #7c3aed; }
-
-        .map-instructions {
-            background: var(--gray-50);
-            border-left: 4px solid var(--primary);
-            padding: 1.25rem;
-            margin: 1.5rem;
-            border-radius: var(--radius-md);
-            font-size: 0.95rem;
-        }
-
-        /* Leaflet harita özel stilleri */
-        .leaflet-container {
-            font-family: inherit;
-            font-size: 0.9rem;
-        }
-
-        .custom-marker {
-            width: 30px;
-            height: 30px;
-            border-radius: 50% 50% 50% 0;
-            background: var(--primary);
-            position: absolute;
-            transform: rotate(-45deg);
-            left: 50%;
-            top: 50%;
-            margin: -15px 0 0 -15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        }
-
-        .custom-marker::after {
-            content: '';
-            width: 14px;
-            height: 14px;
-            margin: 8px 0 0 8px;
-            background: white;
-            position: absolute;
-            border-radius: 50%;
-        }
-
-        .leaflet-popup-content-wrapper {
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .leaflet-popup-content {
-            font-family: inherit;
-            font-size: 0.95rem;
-            padding: 1rem;
-        }
-
-        .leaflet-control-zoom {
-            border: none !important;
-            box-shadow: var(--shadow-md) !important;
-            border-radius: var(--radius-md) !important;
-            overflow: hidden;
-        }
-
-        .leaflet-control-zoom a {
-            border-radius: 0 !important;
-        }
-
-        .leaflet-control-attribution {
-            font-size: 0.7rem !important;
-            padding: 2px 5px !important;
-            background-color: rgba(255, 255, 255, 0.8) !important;
+        .emergency-number .service {
+            font-weight: 600;
+            color: var(--gray-800);
         }
 
         /* Responsive */
@@ -1391,33 +1143,39 @@
                 grid-template-columns: 1fr;
             }
 
-            .map-modal-content {
-                border-radius: 0;
+            .firstaid-modal-content {
+                height: 95%;
+                max-height: 95vh;
+                border-radius: var(--radius-lg);
             }
 
-            .map-tabs {
+            .firstaid-tabs {
                 flex-direction: column;
                 overflow-x: auto;
                 flex-wrap: nowrap;
             }
 
-            .map-tab {
+            .firstaid-tab {
                 padding: 1rem;
                 border-bottom: 1px solid var(--gray-200);
                 justify-content: flex-start;
-                min-width: 200px;
+                min-width: 100%;
             }
 
-            .map-tab.active {
-                border-bottom: 3px solid var(--primary);
+            .firstaid-tab.active {
+                border-bottom: 3px solid var(--accent);
             }
 
-            .map-container, #real-map-container {
-                min-height: 300px;
+            .firstaid-tab-content {
+                padding: 1.5rem;
             }
 
-            .location-list-container {
-                flex: 0 0 250px;
+            .firstaid-tips {
+                grid-template-columns: 1fr;
+            }
+
+            .emergency-numbers {
+                grid-template-columns: 1fr;
             }
 
             .emergency-banner {
@@ -1430,16 +1188,6 @@
             .emergency-banner button {
                 margin-left: 0;
                 width: 100%;
-            }
-
-            .map-actions {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .action-button {
-                width: 100%;
-                justify-content: center;
             }
         }
 
@@ -1458,26 +1206,21 @@
                 padding: 1rem;
             }
 
-            .map-modal-header {
+            .firstaid-modal-header {
                 padding: 1rem;
             }
 
-            .map-modal-header h3 {
+            .firstaid-modal-header h3 {
                 font-size: 1.25rem;
             }
 
-            .map-tab {
+            .firstaid-tab {
                 font-size: 0.9rem;
                 padding: 0.75rem;
             }
 
-            .location-list {
+            .firstaid-step-card {
                 padding: 1rem;
-            }
-
-            .location-permission-screen,
-            .location-error-screen {
-                padding: 2rem 1rem;
             }
         }
 
@@ -1505,18 +1248,8 @@
             background: var(--gray-400);
         }
 
-        /* Pusula animasyonu */
-        .compass-icon {
-            animation: rotateSlow 20s linear infinite;
-        }
-
-        @keyframes rotateSlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
         /* Emergency Banner içindeki buton */
-        #emergencyMapButton {
+        #emergencyFirstAidButton {
             background: rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
@@ -1531,15 +1264,15 @@
             white-space: nowrap;
         }
 
-        #emergencyMapButton:hover {
+        #emergencyFirstAidButton:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        /* Footer'daki harita butonu */
-        #footerMapButton {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        /* Footer'daki ilk yardım butonu */
+        #footerFirstAidButton {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
@@ -1555,34 +1288,46 @@
             justify-content: center;
         }
 
-        #footerMapButton:hover {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        #footerFirstAidButton:hover {
+            background: linear-gradient(135deg, var(--accent), #b91c1c);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        /* Yükleniyor ekranı */
-        .loading-screen {
-            display: none;
-            flex-direction: column;
+        /* Renkli ikonlar */
+        .icon-red { color: var(--accent); }
+        .icon-blue { color: var(--primary); }
+        .icon-green { color: var(--success); }
+        .icon-orange { color: var(--warning); }
+        .icon-purple { color: #7c3aed; }
+
+        /* Numara listesi */
+        .number-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .number-list li {
+            margin-bottom: 0.75rem;
+            padding: 0.75rem;
+            background: var(--gray-50);
+            border-radius: var(--radius-md);
+            display: flex;
             align-items: center;
-            justify-content: center;
-            height: 100%;
-            background: linear-gradient(135deg, var(--primary-soft), var(--white));
+            gap: 1rem;
         }
 
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid var(--gray-200);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 1.5rem;
+        .number-list .number {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--accent);
+            min-width: 100px;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .number-list .service {
+            flex: 1;
+            font-weight: 600;
+            color: var(--gray-800);
         }
     </style>
 </head>
@@ -1608,10 +1353,10 @@
                     <a href="hava.html" class="nav-link">🌪️ Hava Afetleri</a>
                     <a href="İnsan.html" class="nav-link">🔥 İnsan Kaynaklı</a>
                     <a href="hakkinda.html" class="nav-link">ℹ️ Hakkında</a>
-                    <!-- Harita Butonu Eklendi -->
-                    <a href="#" class="nav-link map-button" id="mapButton">
-                        <span>🗺️</span>
-                        Acil Durum Haritası
+                    <!-- Harita Butonu YERİNE İlk Yardım Butonu Eklendi -->
+                    <a href="#" class="nav-link firstaid-button" id="firstAidButton">
+                        <span>🆘</span>
+                        İlk Yardım Rehberi
                     </a>
                 </nav>
 
@@ -1644,118 +1389,311 @@
             <a href="hava.html" class="mobile-menu-link">🌪️ Hava Afetleri</a>
             <a href="İnsan.html" class="mobile-menu-link">🔥 İnsan Kaynaklı</a>
             <a href="hakkinda.html" class="mobile-menu-link">ℹ️ Hakkında</a>
-            <!-- Mobil Menüye Harita Butonu Eklendi -->
-            <a href="#" class="mobile-menu-link map-button" id="mobileMapButton">
-                <span>🗺️</span>
-                Acil Durum Haritası
-                    </a>
+            <!-- Mobil Menüye İlk Yardım Butonu Eklendi -->
+            <a href="#" class="mobile-menu-link firstaid-button" id="mobileFirstAidButton">
+                <span>🆘</span>
+                İlk Yardım Rehberi
+            </a>
         </nav>
     </div>
 
-    <!-- Harita Modal'ı - GERÇEK HARITA İLE -->
-    <div class="map-modal" id="mapModal">
-        <div class="map-modal-content">
-            <div class="map-modal-header">
-                <h3><span class="compass-icon">🧭</span> Acil Durum Haritası</h3>
-                <button class="close-modal-btn" id="closeMapModal">×</button>
+    <!-- İLK YARDIM MODAL'I -->
+    <div class="firstaid-modal" id="firstAidModal">
+        <div class="firstaid-modal-content">
+            <div class="firstaid-modal-header">
+                <h3><span>🆘</span> Acil Durumda İlk Yardım Rehberi</h3>
+                <button class="close-modal-btn" id="closeFirstAidModal">×</button>
             </div>
             
-            <div class="map-modal-body">
-                <div class="map-tabs">
-                    <button class="map-tab active" data-tab="hospitals">🏥 Hastaneler</button>
-                    <button class="map-tab" data-tab="police">🚓 Güvenlik</button>
-                    <button class="map-tab" data-tab="fire">🚒 İtfaiye</button>
-                    <button class="map-tab" data-tab="shelters">🏠 Barınaklar</button>
-                    <button class="map-tab" data-tab="meeting">📍 Toplanma</button>
+            <div class="firstaid-modal-body">
+                <div class="firstaid-tabs">
+                    <button class="firstaid-tab active" data-tab="basic">🧠 Temel Kurallar</button>
+                    <button class="firstaid-tab" data-tab="bleeding">🩸 Kanamalar</button>
+                    <button class="firstaid-tab" data-tab="unconscious">😴 Bayılma</button>
+                    <button class="firstaid-tab" data-tab="burn">🔥 Yanıklar</button>
+                    <button class="firstaid-tab" data-tab="fracture">🦴 Kırıklar</button>
+                    <button class="firstaid-tab" data-tab="numbers">📞 Acil Numaralar</button>
                 </div>
 
-                <!-- TÜM TAB'LAR İÇİN ORTAK HARITA ALANI -->
-                <div class="map-tab-content active" id="hospitals-tab">
-                    <div class="map-container">
-                        <div class="location-permission-screen" id="locationPermissionScreen">
-                            <div class="compass-icon">📍</div>
-                            <h4>Konum Erişimi Gerekli</h4>
-                            <p>En yakın acil durum merkezlerini görmek için konum erişimine izin verin. Konum bilginiz sadece harita üzerinde gösterilmek için kullanılacaktır.</p>
-                            <div class="map-actions">
-                                <button class="action-button" id="requestLocation">
-                                    <span>📍 Konumumu Paylaş</span>
-                                </button>
-                            </div>
-                            <div class="map-instructions">
-                                <strong>ℹ️ Bilgi:</strong> Konum paylaşımını reddederseniz, harita özelliklerini kullanamazsınız.
-                            </div>
-                        </div>
-                        
-                        <!-- Konum Hatası Ekranı -->
-                        <div class="location-error-screen" id="locationErrorScreen">
-                            <div class="error-icon">❌</div>
-                            <h4>Konum Erişimi Reddedildi</h4>
-                            <p>Harita özelliklerini kullanmak için konum erişimine izin vermeniz gerekiyor. Tarayıcı ayarlarınızdan konum iznini açabilirsiniz.</p>
-                            <div class="map-actions">
-                                <button class="action-button" id="retryLocation">
-                                    <span>🔄 Tekrar Dene</span>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Yükleniyor Ekranı -->
-                        <div class="loading-screen" id="loadingScreen">
-                            <div class="loading-spinner"></div>
-                            <h4>Konumunuz alınıyor...</h4>
-                            <p>Lütfen bekleyin</p>
-                        </div>
-                        
-                        <!-- GERÇEK HARITA KONTEYNERİ -->
-                        <div id="real-map-container" style="display: none;"></div>
-                    </div>
+                <!-- Temel Kurallar Tab'ı -->
+                <div class="firstaid-tab-content active" id="basic-tab">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--accent);">İlk Yardımın Temel Kuralları</h3>
                     
-                    <!-- Lokasyon Listesi -->
-                    <div class="location-list-container">
-                        <div class="location-list-header">
-                            <h4><span id="tab-icon">🏥</span> <span id="tab-title">En Yakın Acil Servisler</span></h4>
-                            <span class="distance-badge" style="background: var(--accent);" id="locationCount">0 Kayıt</span>
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-red">1️⃣</span> Sakin Olun ve Güvenliği Sağlayın</h4>
+                        <p>Önce kendi güvenliğinizi kontrol edin, sonra çevreyi değerlendirin. Elektrik, gaz, yangın gibi riskleri kontrol edin. Yaralıyı güvenli bir yere alın.</p>
+                    </div>
+
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-blue">2️⃣</span> 112'yi Arayın veya Aratın</h4>
+                        <p>Hemen 112 Acil'i arayın veya başkasına aratın. Sakin bir şekilde:<br>
+                        • Olayın ne olduğunu<br>
+                        • Adresi tam olarak<br>
+                        • Yaralı sayısını ve durumunu<br>
+                        • İsim ve telefon numaranızı bildirin.</p>
+                    </div>
+
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-green">3️⃣</span> Yaralıyı Değerlendirin</h4>
+                        <p>• Bilinç kontrolü yapın<br>
+                        • Solunumunu kontrol edin<br>
+                        • Nabzını kontrol edin<br>
+                        • Ciddi kanama olup olmadığını kontrol edin</p>
+                    </div>
+
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-orange">4️⃣</span> Temel Yaşam Desteği (ABC Kuralı)</h4>
+                        <p><strong>A (Airway):</strong> Havayolunu açık tutun<br>
+                        <strong>B (Breathing):</strong> Solunumu sağlayın<br>
+                        <strong>C (Circulation):</strong> Dolaşımı destekleyin</p>
+                    </div>
+
+                    <div class="firstaid-warning">
+                        <h5><span>⚠️</span> ÖNEMLİ UYARI</h5>
+                        <p>• Bilinçsiz yaralıları hareket ettirmeyin (boyun yaralanması riski)<br>
+                        • Bilinçsiz yaralılara kesinlikle su veya yiyecek vermeyin<br>
+                        • Yaralının üzerindeki giysileri keserek çıkarın<br>
+                        • Yaralıyı sıcak tutun ama terletmeyin</p>
+                    </div>
+                </div>
+
+                <!-- Kanamalar Tab'ı -->
+                <div class="firstaid-tab-content" id="bleeding-tab">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--accent);">Kanamalarda İlk Yardım</h3>
+                    
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-red">🩸</span> İç Kanama Belirtileri</h4>
+                        <p>• Soluk, soğuk, nemli cilt<br>
+                        • Hızlı ve zayıf nabız<br>
+                        • Hızlı ve yüzeysel solunum<br>
+                        • Baş dönmesi, baygınlık hissi<br>
+                        • Şok belirtileri</p>
+                    </div>
+
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-blue">🎯</span> Kanamayı Durdurma Yöntemleri</h4>
+                        <p><strong>1. Basınç Uygulama:</strong> Temiz bir bezle kanayan yere direkt basınç uygulayın<br>
+                        <strong>2. Yüksekte Tutma:</strong> Kanayan bölgeyi kalp seviyesinin üzerine kaldırın<br>
+                        <strong>3. Basınç Noktaları:</strong> Atardamar kanamalarında basınç noktalarına basın</p>
+                    </div>
+
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-green">⚠️</span> Turnike Uygulama (Sadece Hayati Risk Varsa!)</h4>
+                        <p>• Sadece atardamar kanamalarında ve diğer yöntemler işe yaramazsa<br>
+                        • 5-7 cm genişliğinde bir bez kullanın<br>
+                        • Kanayan yer ile vücut arasına uygulayın<br>
+                        • Uygulama saatini not edin<br>
+                        • 15-20 dakikada bir 5-10 saniye gevşetin</p>
+                    </div>
+
+                    <div class="firstaid-warning">
+                        <h5><span>❌</span> YAPILMAMASI GEREKENLER</h5>
+                        <p>• Kanayan yere tentürdiyot, alkol vs. dökmeyin<br>
+                        • Yaraya pamuk basmayın<br>
+                        • Batmış cisimleri çıkarmaya çalışmayın<br>
+                        • Turnikeyi gereksiz yere sıkmayın</p>
+                    </div>
+                </div>
+
+                <!-- Bayılma Tab'ı -->
+                <div class="firstaid-tab-content" id="unconscious-tab">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--accent);">Bilinç Kaybı ve Bayılmada İlk Yardım</h3>
+                    
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-red">😴</span> Bilinç Kontrolü Nasıl Yapılır?</h4>
+                        <p>1. Omuzlarından hafifçe sarsarak "İyi misiniz?" diye sorun<br>
+                        2. Yanıt yoksa acil servisi arayın<br>
+                        3. Solunumunu kontrol edin (göğüs hareketi, nefes sesi)<br>
+                        4. Nabzını kontrol edin (boyun veya bilekten)</p>
+                    </div>
+
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-blue">🔄</span> Koma Pozisyonu (Yan Yatış)</h4>
+                        <p>1. Yaralıyı sırt üstü yatırın<br>
+                        2. Yakın taraftaki kolu baş hizasında uzatın<br>
+                        3. Diğer elini yanağının altına koyun<br>
+                        4. Uzaktaki bacağını dizden bükün<br>
+                        5. Omuz ve kalçadan çevirerek yan yatırın<br>
+                        6. Başını geriye yatırıp çeneyi yukarı kaldırın</p>
+                    </div>
+
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-green">💓</span> Kalp Masajı (Temel Yaşam Desteği)</h4>
+                        <p><strong>Yetişkinler için:</strong><br>
+                        • 30 kalp masajı - 2 suni solunum<br>
+                        • Dakikada 100-120 bası<br>
+                        • Göğüs 5-6 cm çökmeli<br>
+                        • Dirsekler dik, omuzlar bası noktasının üstünde</p>
+                    </div>
+
+                    <div class="firstaid-tips">
+                        <div class="firstaid-tip">
+                            <h5><span>🌬️</span> Suni Solunum</h5>
+                            <p>Başı geriye yatır, çeneyi kaldır. Burunu kapat, ağızdan ağza 1 saniye üfle, göğsün kalktığını gör.</p>
                         </div>
-                        <div class="location-list" id="locations-list">
-                            <!-- Dinamik olarak JavaScript ile doldurulacak -->
-                            <div class="location-item" style="text-align: center; padding: 3rem 1rem;">
-                                <div style="font-size: 2rem; margin-bottom: 1rem;">📍</div>
-                                <h4>Konum Gerekli</h4>
-                                <p>En yakın acil durum merkezlerini görmek için konum erişimine izin verin</p>
-                            </div>
+                        <div class="firstaid-tip">
+                            <h5><span>👶</span> Bebeklerde</h5>
+                            <p>2 parmakla göğüs ortasına bas. 30 masaj - 2 solunum. Göğüs 4 cm çökmeli.</p>
+                        </div>
+                        <div class="firstaid-tip">
+                            <h5><span>🧒</span> Çocuklarda</h5>
+                            <p>1 el veya 2 parmakla. 30 masaj - 2 solunum. Göğüs 5 cm çökmeli.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yanıklar Tab'ı -->
+                <div class="firstaid-tab-content" id="burn-tab">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--accent);">Yanıklarda İlk Yardım</h3>
+                    
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-red">🔥</span> 1. Derece Yanık</h4>
+                        <p><strong>Belirtiler:</strong> Kızarıklık, hafif şişlik, ağrı<br>
+                        <strong>Yapılacaklar:</strong><br>
+                        1. Yanık bölgeyi 15-20 dakika soğuk su altında tutun<br>
+                        2. Temiz bir bezle kurulayın<br>
+                        3. Yanık kremi sürün<br>
+                        4. Steril gazlı bezle kapatın</p>
+                    </div>
+
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-blue">🔥</span> 2. Derece Yanık</h4>
+                        <p><strong>Belirtiler:</strong> İçi su dolu kabarcıklar, şiddetli ağrı<br>
+                        <strong>Yapılacaklar:</strong><br>
+                        1. Soğuk su uygulayın (buz değil!)<br>
+                        2. Kabarcıkları patlatmayın<br>
+                        3. Temiz bezle örtün<br>
+                        4. Acil servise başvurun</p>
+                    </div>
+
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-green">🔥</span> 3. Derece Yanık</h4>
+                        <p><strong>Belirtiler:</strong> Deri beyaz veya kömürleşmiş, ağrı yok (sinirler yandı)<br>
+                        <strong>Yapılacaklar:</strong><br>
+                        1. Hemen 112'yi arayın<br>
+                        2. Yanık bölgeyi temiz bezle örtün<br>
+                        3. Yaralıyı sıcak tutun<br>
+                        4. Kesinlikle su uygulamayın</p>
+                    </div>
+
+                    <div class="firstaid-warning">
+                        <h5><span>❌</span> YANIKLARDA ASLA YAPMAYIN!</h5>
+                        <p>• Diş macunu, yoğurt, salça sürmeyin<br>
+                        • Buz uygulamayın<br>
+                        • Kabarcıkları patlatmayın<br>
+                        • Yapışkan pansuman yapmayın<br>
+                        • Yanık üzerine direkt ilaç sürmeyin</p>
+                    </div>
+                </div>
+
+                <!-- Kırıklar Tab'ı -->
+                <div class="firstaid-tab-content" id="fracture-tab">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--accent);">Kırık, Çıkık ve Burkulmalarda İlk Yardım</h3>
+                    
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-red">🦴</span> Kırık Belirtileri</h4>
+                        <p>• Şiddetli ağrı<br>
+                        • Şişlik ve morarma<br>
+                        • Şekil bozukluğu<br>
+                        • Hareket edememe<br>
+                        • Kırık sesi duyulması<br>
+                        • Kemik uçlarının görülmesi (açık kırık)</p>
+                    </div>
+
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-blue">🩹</span> Kapalı Kırıkta İlk Yardım</h4>
+                        <p>1. Yaralı bölgeyi hareket ettirmeyin<br>
+                        2. Kırık bölgenin üstündeki ve altındaki eklemleri sabitleyin<br>
+                        3. Soğuk uygulayın (buz torbası)<br>
+                        4. Yaralı bölgeyi kalp seviyesinden yukarıda tutun<br>
+                        5. Acil servise başvurun</p>
+                    </div>
+
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-green">⚠️</span> Açık Kırıkta İlk Yardım</h4>
+                        <p>1. Kanamayı kontrol altına alın<br>
+                        2. Dışarı çıkan kemik uçlarını içeri itmeyin<br>
+                        3. Temiz bir bezle örtün<br>
+                        4. Atel uygulayın (tahta, karton, gazete)<br>
+                        5. Hemen 112'yi arayın</p>
+                    </div>
+
+                    <div class="firstaid-step-card">
+                        <h4><span class="icon-orange">🦵</span> Atel Uygulama</h4>
+                        <p>• Kırık bölgenin üstündeki ve altındaki eklemleri içine alacak şekilde<br>
+                        • Yumuşak malzeme ile destekleyin<br>
+                        • Sargıyı çok sıkı yapmayın<br>
+                        • Parmakları açıkta bırakın (dolaşım kontrolü için)<br>
+                        • 20 dakikada bir dolaşımı kontrol edin</p>
+                    </div>
+                </div>
+
+                <!-- Acil Numaralar Tab'ı -->
+                <div class="firstaid-tab-content" id="numbers-tab">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--accent);">Acil Durum Telefon Numaraları</h3>
+                    
+                    <div class="emergency-numbers">
+                        <div class="emergency-number">
+                            <div class="number">112</div>
+                            <div class="service">ACİL YARDIM</div>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Tüm acil durumlar</p>
+                        </div>
+                        <div class="emergency-number">
+                            <div class="number">110</div>
+                            <div class="service">İTFAİYE</div>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Yangın, kurtarma</p>
+                        </div>
+                        <div class="emergency-number">
+                            <div class="number">155</div>
+                            <div class="service">POLİS İMDAT</div>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Güvenlik, asayiş</p>
+                        </div>
+                        <div class="emergency-number">
+                            <div class="number">156</div>
+                            <div class="service">JANDARMA</div>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Kırsal bölgeler</p>
                         </div>
                     </div>
 
-                    <div class="map-legend" id="map-legend">
-                        <div class="map-legend-item">
-                            <span class="legend-color hospital"></span>
-                            <span>24 Saat Acil Servis</span>
-                        </div>
-                        <div class="map-legend-item">
-                            <span class="legend-color police"></span>
-                            <span>Poliklinik Hizmeti</span>
-                        </div>
-                        <div class="map-legend-item">
-                            <span class="legend-color meeting"></span>
-                            <span>Ambulans Servisi</span>
-                        </div>
+                    <div style="margin-top: 2.5rem;">
+                        <h4 style="color: var(--primary); margin-bottom: 1rem;">📞 Diğer Önemli Numaralar</h4>
+                        <ul class="number-list">
+                            <li>
+                                <span class="number">184</span>
+                                <span class="service">SABİM - Sağlık Bakanlığı Bilgi</span>
+                            </li>
+                            <li>
+                                <span class="number">185</span>
+                                <span class="service">SU ŞİKAYET</span>
+                            </li>
+                            <li>
+                                <span class="number">186</span>
+                                <span class="service">ELEKTRİK ARIZA</span>
+                            </li>
+                            <li>
+                                <span class="number">187</span>
+                                <span class="service">DOĞAL GAZ ARIZA</span>
+                            </li>
+                            <li>
+                                <span class="number">153</span>
+                                <span class="service">BELEDİYE ZABITA</span>
+                            </li>
+                            <li>
+                                <span class="number">154</span>
+                                <span class="service">TRAFİK POLİSİ</span>
+                            </li>
+                        </ul>
                     </div>
-                </div>
 
-                <!-- Diğer Tab'lar (Tümü aynı haritayı paylaşıyor) -->
-                <div class="map-tab-content" id="police-tab">
-                    <!-- Aynı harita alanı kullanılacak -->
-                </div>
-
-                <div class="map-tab-content" id="fire-tab">
-                    <!-- Aynı harita alanı kullanılacak -->
-                </div>
-
-                <div class="map-tab-content" id="shelters-tab">
-                    <!-- Aynı harita alanı kullanılacak -->
-                </div>
-
-                <div class="map-tab-content" id="meeting-tab">
-                    <!-- Aynı harita alanı kullanılacak -->
+                    <div class="firstaid-warning" style="margin-top: 2rem;">
+                        <h5><span>📱</span> ACİL ARAMA YAPARKEN</h5>
+                        <p>1. <strong>Sakin olun</strong> ve net konuşun<br>
+                        2. <strong>Tam adresinizi</strong> söyleyin<br>
+                        3. <strong>Olayın ne olduğunu</strong> açıklayın<br>
+                        4. <strong>Yaralı sayısı ve durumunu</strong> bildirin<br>
+                        5. <strong>İsminizi ve telefonunuzu</strong> söyleyin<br>
+                        6. <strong>Telefonu ilk siz kapatmayın</strong></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1789,9 +1727,9 @@
                     <span style="font-size: 0.9rem;">Tüm acil durumlar için tek numara</span>
                 </div>
             </div>
-            <button id="emergencyMapButton">
-                <span>🗺️</span>
-                Haritada Göster
+            <button id="emergencyFirstAidButton">
+                <span>🆘</span>
+                İlk Yardım Rehberi
             </button>
         </div>
     </div>
@@ -1934,9 +1872,9 @@
                         <p style="color: var(--gray-400); margin-bottom: 1.5rem;">
                             Doğal afetlere hazırlık için rehber ve bilgi kaynağı. Herkes için güvenlik.
                         </p>
-                        <button id="footerMapButton">
-                            <span>🗺️</span>
-                            Acil Durum Haritası
+                        <button id="footerFirstAidButton">
+                            <span>🆘</span>
+                            İlk Yardım Rehberi
                         </button>
                     </div>
 
@@ -2071,10 +2009,10 @@
                 e.preventDefault();
                 window.print();
             }
-            // Ctrl + M for map
-            if (e.ctrlKey && e.key === 'm') {
+            // Ctrl + F for first aid
+            if (e.ctrlKey && e.key === 'f') {
                 e.preventDefault();
-                openMapModal();
+                openFirstAidModal();
             }
         });
 
@@ -2095,109 +2033,36 @@
             });
         });
 
-        // ==================== GERÇEK HARITA SİSTEMİ - TÜM TAB'LAR ÇALIŞACAK ====================
+        // ==================== İLK YARDIM MODAL SİSTEMİ ====================
 
-        // Harita modal elementleri
-        const mapModal = document.getElementById('mapModal');
-        const mapButton = document.getElementById('mapButton');
-        const mobileMapButton = document.getElementById('mobileMapButton');
-        const emergencyMapButton = document.getElementById('emergencyMapButton');
-        const footerMapButton = document.getElementById('footerMapButton');
-        const closeMapModal = document.getElementById('closeMapModal');
-        const mapTabs = document.querySelectorAll('.map-tab');
-        const tabContents = document.querySelectorAll('.map-tab-content');
+        // Modal elementleri
+        const firstAidModal = document.getElementById('firstAidModal');
+        const firstAidButton = document.getElementById('firstAidButton');
+        const mobileFirstAidButton = document.getElementById('mobileFirstAidButton');
+        const emergencyFirstAidButton = document.getElementById('emergencyFirstAidButton');
+        const footerFirstAidButton = document.getElementById('footerFirstAidButton');
+        const closeFirstAidModal = document.getElementById('closeFirstAidModal');
+        const firstAidTabs = document.querySelectorAll('.firstaid-tab');
+        const firstAidTabContents = document.querySelectorAll('.firstaid-tab-content');
 
-        // Konum ekranları
-        const locationPermissionScreen = document.getElementById('locationPermissionScreen');
-        const locationErrorScreen = document.getElementById('locationErrorScreen');
-        const loadingScreen = document.getElementById('loadingScreen');
-        const realMapContainer = document.getElementById('real-map-container');
-
-        // Butonlar
-        const requestLocationBtn = document.getElementById('requestLocation');
-        const retryLocationBtn = document.getElementById('retryLocation');
-
-        // Harita ve liste elementleri
-        const tabIcon = document.getElementById('tab-icon');
-        const tabTitle = document.getElementById('tab-title');
-        const locationCount = document.getElementById('locationCount');
-        const locationsList = document.getElementById('locations-list');
-        const mapLegend = document.getElementById('map-legend');
-
-        // Harita değişkenleri
-        let map = null;
-        let userLocation = null;
-        let userMarker = null;
-        let locationMarkers = [];
-        let currentTab = 'hospitals';
-
-        // Tab bilgileri
-        const tabInfo = {
-            hospitals: {
-                icon: '🏥',
-                title: 'En Yakın Acil Servisler',
-                color: '#dc2626',
-                places: ['hospital', 'clinic', 'health_center'],
-                names: ['Şehir Hastanesi', 'Üniversite Hastanesi', 'Devlet Hastanesi', 'Çocuk Hastanesi', 'Acil Sağlık Merkezi']
-            },
-            police: {
-                icon: '🚓',
-                title: 'Güvenlik Birimleri',
-                color: '#2563eb',
-                places: ['police', 'police_station', 'police_box'],
-                names: ['Merkez Polis Karakolu', 'Trafik Polisi', 'İl Jandarma Komutanlığı', 'Asayiş Büro Amirliği']
-            },
-            fire: {
-                icon: '🚒',
-                title: 'İtfaiye İstasyonları',
-                color: '#ea580c',
-                places: ['fire_station', 'fire_department'],
-                names: ['Merkez İtfaiye', 'Kuzey İtfaiye İstasyonu', 'Güney İtfaiye İstasyonu', 'Orman İtfaiyesi']
-            },
-            shelters: {
-                icon: '🏠',
-                title: 'Barınma Merkezleri',
-                color: '#059669',
-                places: ['shelter', 'community_center', 'school'],
-                names: ['AFAD Barınma Merkezi', 'Kızılay Konteyner Kent', 'Spor Salonu Barınma Alanı', 'Okul Geçici Barınma']
-            },
-            meeting: {
-                icon: '📍',
-                title: 'Toplanma Alanları',
-                color: '#7c3aed',
-                places: ['park', 'stadium', 'square'],
-                names: ['Merkez Park Toplanma Alanı', 'Stadyum Acil Toplanma', 'Meydan Toplanma Noktası', 'Okul Bahçesi', 'Cami Avlusu']
-            }
-        };
-
-        // Harita modal'ını aç
-        function openMapModal() {
-            mapModal.classList.add('active');
+        // Modal'ı aç
+        function openFirstAidModal() {
+            firstAidModal.classList.add('active');
             document.body.style.overflow = 'hidden';
             // Varsayılan tab'ı aktif et
-            switchTab('hospitals');
-            
-            // Kullanıcı konumunu kontrol et
-            checkLocationPermission();
+            switchFirstAidTab('basic');
         }
 
-        // Harita modal'ını kapat
-        function closeMapModalFunc() {
-            mapModal.classList.remove('active');
+        // Modal'ı kapat
+        function closeFirstAidModalFunc() {
+            firstAidModal.classList.remove('active');
             document.body.style.overflow = '';
-            // Haritayı temizle
-            if (map) {
-                map.remove();
-                map = null;
-            }
         }
 
         // Tab değiştirme
-        function switchTab(tabName) {
-            currentTab = tabName;
-            
+        function switchFirstAidTab(tabName) {
             // Tüm tab'ları deaktif et
-            mapTabs.forEach(tab => {
+            firstAidTabs.forEach(tab => {
                 tab.classList.remove('active');
                 if (tab.dataset.tab === tabName) {
                     tab.classList.add('active');
@@ -2205,457 +2070,70 @@
             });
 
             // Tüm içerikleri gizle
-            tabContents.forEach(content => {
+            firstAidTabContents.forEach(content => {
                 content.classList.remove('active');
                 if (content.id === `${tabName}-tab`) {
                     content.classList.add('active');
                 }
             });
 
-            // Tab bilgilerini güncelle
-            updateTabInfo();
-
-            // Eğer konum varsa, ilgili haritayı yükle
-            if (userLocation) {
-                loadLocationsForCurrentTab();
+            // İçeriği en üste kaydır
+            const activeContent = document.getElementById(`${tabName}-tab`);
+            if (activeContent) {
+                activeContent.scrollTop = 0;
             }
-        }
-
-        // Tab bilgilerini güncelle
-        function updateTabInfo() {
-            const info = tabInfo[currentTab];
-            if (info) {
-                tabIcon.textContent = info.icon;
-                tabTitle.textContent = info.title;
-                locationCount.style.backgroundColor = info.color;
-            }
-        }
-
-        // Konum iznini kontrol et
-        function checkLocationPermission() {
-            // Önce localStorage'dan kayıtlı konumu kontrol et
-            const savedLocation = localStorage.getItem('userLocation');
-            if (savedLocation) {
-                userLocation = JSON.parse(savedLocation);
-                showRealMap();
-                return;
-            }
-
-            // Yoksa izin ekranını göster
-            showLocationPermissionScreen();
-        }
-
-        // Konum izin ekranını göster
-        function showLocationPermissionScreen() {
-            locationPermissionScreen.style.display = 'flex';
-            locationErrorScreen.style.display = 'none';
-            loadingScreen.style.display = 'none';
-            realMapContainer.style.display = 'none';
-            updateTabInfo();
-        }
-
-        // Konum hata ekranını göster
-        function showLocationErrorScreen() {
-            locationPermissionScreen.style.display = 'none';
-            locationErrorScreen.style.display = 'flex';
-            loadingScreen.style.display = 'none';
-            realMapContainer.style.display = 'none';
-        }
-
-        // Yükleniyor ekranını göster
-        function showLoadingScreen() {
-            locationPermissionScreen.style.display = 'none';
-            locationErrorScreen.style.display = 'none';
-            loadingScreen.style.display = 'flex';
-            realMapContainer.style.display = 'none';
-        }
-
-        // Gerçek haritayı göster
-        function showRealMap() {
-            locationPermissionScreen.style.display = 'none';
-            locationErrorScreen.style.display = 'none';
-            loadingScreen.style.display = 'none';
-            realMapContainer.style.display = 'block';
-            
-            // Haritayı yükle
-            loadMap();
-        }
-
-        // Konum iste
-        async function requestUserLocation() {
-            showLoadingScreen();
-            
-            if (!navigator.geolocation) {
-                showLocationErrorScreen();
-                return;
-            }
-
-            try {
-                const position = await new Promise((resolve, reject) => {
-                    navigator.geolocation.getCurrentPosition(resolve, reject, {
-                        enableHighAccuracy: true,
-                        timeout: 10000,
-                        maximumAge: 0
-                    });
-                });
-
-                userLocation = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                    accuracy: position.coords.accuracy
-                };
-
-                // Konumu localStorage'a kaydet
-                localStorage.setItem('userLocation', JSON.stringify(userLocation));
-                
-                showRealMap();
-            } catch (error) {
-                console.error('Konum alınamadı:', error);
-                showLocationErrorScreen();
-            }
-        }
-
-        // Harita yükle
-        function loadMap() {
-            if (!userLocation || !realMapContainer) return;
-
-            // Önceki haritayı temizle
-            if (map) {
-                map.remove();
-                locationMarkers.forEach(marker => map.removeLayer(marker));
-                locationMarkers = [];
-            }
-
-            // Yeni harita oluştur
-            map = L.map('real-map-container').setView([userLocation.lat, userLocation.lng], 13);
-
-            // OpenStreetMap tile layer
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                maxZoom: 19
-            }).addTo(map);
-
-            // Kullanıcı konumunu işaretle
-            userMarker = L.marker([userLocation.lat, userLocation.lng], {
-                icon: L.divIcon({
-                    className: 'custom-marker',
-                    html: '<div style="background-color: var(--primary);"></div>',
-                    iconSize: [30, 30],
-                    iconAnchor: [15, 30]
-                })
-            }).addTo(map);
-
-            userMarker.bindPopup("<b>Sizin Konumunuz</b><br>Harita bu konuma göre gösteriliyor").openPopup();
-
-            // Mevcut tab için konumları yükle
-            loadLocationsForCurrentTab();
-        }
-
-        // Mevcut tab için konumları yükle
-        function loadLocationsForCurrentTab() {
-            if (!map || !userLocation) return;
-
-            // Önceki işaretçileri temizle
-            locationMarkers.forEach(marker => map.removeLayer(marker));
-            locationMarkers = [];
-
-            // Simüle edilmiş veriler (Google Maps API'si için demo)
-            const simulatedLocations = generateSimulatedLocationsForTab(currentTab, userLocation);
-            
-            // İşaretçileri haritaya ekle
-            simulatedLocations.forEach((location, index) => {
-                const marker = L.marker([location.lat, location.lng], {
-                    icon: L.divIcon({
-                        className: 'custom-marker',
-                        html: `<div style="background-color: ${tabInfo[currentTab].color};"></div>`,
-                        iconSize: [25, 25],
-                        iconAnchor: [12, 25]
-                    })
-                }).addTo(map);
-                
-                // Popup içeriği
-                const popupContent = `
-                    <div style="font-family: inherit; min-width: 200px;">
-                        <h4 style="margin: 0 0 8px 0; color: var(--primary);">${location.name}</h4>
-                        <p style="margin: 0 0 8px 0; font-size: 0.9em;">${location.address}</p>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 0.85em; color: var(--gray-600);">${location.distance} uzaklıkta</span>
-                            ${location.phone !== 'Yok' ? 
-                                `<a href="tel:${location.phone}" style="background: var(--primary); color: white; padding: 4px 8px; border-radius: 4px; text-decoration: none; font-size: 0.85em;">📞 ${location.phone}</a>` : 
-                                '<span style="font-size: 0.85em; color: var(--gray-500);">📞 Telefon yok</span>'}
-                        </div>
-                    </div>
-                `;
-                
-                marker.bindPopup(popupContent);
-                locationMarkers.push(marker);
-            });
-
-            // Lokasyon listesini güncelle
-            updateLocationList(simulatedLocations);
-        }
-
-        // Her tab için simüle edilmiş konumlar oluştur
-        function generateSimulatedLocationsForTab(tab, userLocation) {
-            const info = tabInfo[tab];
-            if (!info) return [];
-
-            const locations = [];
-            const count = info.names.length;
-
-            for (let i = 0; i < count; i++) {
-                // Kullanıcı konumuna yakın rastgele koordinatlar oluştur
-                const lat = userLocation.lat + (Math.random() - 0.5) * 0.05;
-                const lng = userLocation.lng + (Math.random() - 0.5) * 0.05;
-                
-                // Mesafe hesapla (basit simülasyon)
-                const distance = (Math.random() * 5 + 0.5).toFixed(1) + ' km';
-                
-                // Telefon numarası
-                let phone = 'Yok';
-                if (tab === 'hospitals') phone = '112';
-                else if (tab === 'police') phone = '155';
-                else if (tab === 'fire') phone = '110';
-                else if (tab === 'shelters') phone = '1222';
-                
-                locations.push({
-                    name: info.names[i],
-                    address: `${getRandomStreet()} ${Math.floor(Math.random() * 100) + 1}`,
-                    phone: phone,
-                    distance: distance,
-                    lat: lat,
-                    lng: lng,
-                    type: tab
-                });
-            }
-
-            return locations;
-        }
-
-        // Rastgele sokak adı
-        function getRandomStreet() {
-            const streets = ['Cumhuriyet Cad.', 'Atatürk Bulvarı', 'İnönü Sok.', 'Zafer Mah.', 'Barış Cad.', 'Şehitler Sok.', 'Güvenlik Mah.', 'Sağlık Cad.'];
-            return streets[Math.floor(Math.random() * streets.length)];
-        }
-
-        // Lokasyon listesini güncelle
-        function updateLocationList(locations) {
-            if (!locationsList) return;
-
-            locationsList.innerHTML = '';
-            
-            if (locationCount) {
-                locationCount.textContent = `${locations.length} Kayıt`;
-            }
-
-            // Eğer konum yoksa mesaj göster
-            if (locations.length === 0) {
-                const emptyMessage = document.createElement('div');
-                emptyMessage.className = 'location-item';
-                emptyMessage.style.textAlign = 'center';
-                emptyMessage.style.padding = '3rem 1rem';
-                emptyMessage.innerHTML = `
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">${tabInfo[currentTab]?.icon || '📍'}</div>
-                    <h4>${tabInfo[currentTab]?.title || 'Konumlar'}</h4>
-                    <p>Bu bölgede kayıtlı ${tabInfo[currentTab]?.title?.toLowerCase() || 'konum'} bulunamadı</p>
-                `;
-                locationsList.appendChild(emptyMessage);
-                return;
-            }
-
-            locations.forEach(location => {
-                const locationItem = document.createElement('div');
-                locationItem.className = 'location-item';
-                
-                const icon = tabInfo[currentTab]?.icon || '📍';
-                const phoneLink = location.phone !== 'Yok' 
-                    ? `<a href="tel:${location.phone}" class="phone-link">📞 ${location.phone}</a>`
-                    : '<span style="color: var(--gray-500); padding: 0.5rem 0.75rem;">📞 Telefon Yok</span>';
-                
-                locationItem.innerHTML = `
-                    <h4>${icon} ${location.name}</h4>
-                    <p>${location.address}</p>
-                    <div class="location-details">
-                        ${phoneLink}
-                        <span class="distance-badge">${location.distance}</span>
-                    </div>
-                `;
-                
-                // Tıklanınca haritada göster
-                locationItem.addEventListener('click', () => {
-                    if (map) {
-                        map.setView([location.lat, location.lng], 16);
-                        // İşaretçinin popup'ını aç
-                        const marker = locationMarkers.find(m => 
-                            m.getLatLng().lat === location.lat && 
-                            m.getLatLng().lng === location.lng
-                        );
-                        if (marker) {
-                            marker.openPopup();
-                        }
-                    }
-                });
-                
-                locationItem.style.cursor = 'pointer';
-                locationsList.appendChild(locationItem);
-            });
-        }
-
-        // Lejantı güncelle
-        function updateLegend() {
-            if (!mapLegend) return;
-
-            const info = tabInfo[currentTab];
-            if (!info) return;
-
-            let legendHTML = '';
-            
-            switch(currentTab) {
-                case 'hospitals':
-                    legendHTML = `
-                        <div class="map-legend-item">
-                            <span class="legend-color hospital"></span>
-                            <span>24 Saat Acil Servis</span>
-                        </div>
-                        <div class="map-legend-item">
-                            <span class="legend-color police"></span>
-                            <span>Poliklinik Hizmeti</span>
-                        </div>
-                        <div class="map-legend-item">
-                            <span class="legend-color meeting"></span>
-                            <span>Ambulans Servisi</span>
-                        </div>
-                    `;
-                    break;
-                case 'police':
-                    legendHTML = `
-                        <div class="map-legend-item">
-                            <span class="legend-color police"></span>
-                            <span>Polis Merkezi</span>
-                        </div>
-                        <div class="map-legend-item">
-                            <span class="legend-color hospital"></span>
-                            <span>Jandarma Karakolu</span>
-                        </div>
-                        <div class="map-legend-item">
-                            <span class="legend-color fire"></span>
-                            <span>Güvenlik Noktası</span>
-                        </div>
-                    `;
-                    break;
-                case 'fire':
-                    legendHTML = `
-                        <div class="map-legend-item">
-                            <span class="legend-color fire"></span>
-                            <span>İtfaiye İstasyonu</span>
-                        </div>
-                        <div class="map-legend-item">
-                            <span class="legend-color hospital"></span>
-                            <span>Yangın Söndürme Merkezi</span>
-                        </div>
-                        <div class="map-legend-item">
-                            <span class="legend-color police"></span>
-                            <span>Orman İtfaiyesi</span>
-                        </div>
-                    `;
-                    break;
-                case 'shelters':
-                    legendHTML = `
-                        <div class="map-legend-item">
-                            <span class="legend-color shelter"></span>
-                            <span>AFAD Barınma Merkezi</span>
-                        </div>
-                        <div class="map-legend-item">
-                            <span class="legend-color meeting"></span>
-                            <span>Kızılay Konteyner Kent</span>
-                        </div>
-                        <div class="map-legend-item">
-                            <span class="legend-color hospital"></span>
-                            <span>Geçici Yardım Merkezi</span>
-                        </div>
-                    `;
-                    break;
-                case 'meeting':
-                    legendHTML = `
-                        <div class="map-legend-item">
-                            <span class="legend-color meeting"></span>
-                            <span>Acil Toplanma Alanı</span>
-                        </div>
-                        <div class="map-legend-item">
-                            <span class="legend-color shelter"></span>
-                            <span>Geçici Barınma</span>
-                        </div>
-                        <div class="map-legend-item">
-                            <span class="legend-color police"></span>
-                            <span>Yardım Dağıtım Noktası</span>
-                        </div>
-                    `;
-                    break;
-            }
-
-            mapLegend.innerHTML = legendHTML;
         }
 
         // ==================== EVENT LISTENERS ====================
 
-        // Harita modal butonları
-        mapButton.addEventListener('click', (e) => {
+        // İlk yardım modal butonları
+        firstAidButton.addEventListener('click', (e) => {
             e.preventDefault();
-            openMapModal();
+            openFirstAidModal();
         });
 
-        mobileMapButton.addEventListener('click', (e) => {
+        mobileFirstAidButton.addEventListener('click', (e) => {
             e.preventDefault();
-            openMapModal();
+            openFirstAidModal();
             toggleMobileMenu();
         });
 
-        emergencyMapButton.addEventListener('click', (e) => {
+        emergencyFirstAidButton.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            openMapModal();
-            switchTab('hospitals');
+            openFirstAidModal();
+            switchFirstAidTab('basic');
         });
 
-        footerMapButton.addEventListener('click', openMapModal);
-        closeMapModal.addEventListener('click', closeMapModalFunc);
+        footerFirstAidButton.addEventListener('click', openFirstAidModal);
+        closeFirstAidModal.addEventListener('click', closeFirstAidModalFunc);
 
         // Modal dışına tıklayarak kapatma
-        mapModal.addEventListener('click', (e) => {
-            if (e.target === mapModal) {
-                closeMapModalFunc();
+        firstAidModal.addEventListener('click', (e) => {
+            if (e.target === firstAidModal) {
+                closeFirstAidModalFunc();
             }
         });
 
         // Tab'lar için event listener
-        mapTabs.forEach(tab => {
+        firstAidTabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                switchTab(tab.dataset.tab);
+                switchFirstAidTab(tab.dataset.tab);
             });
         });
 
-        // Konum butonları
-        requestLocationBtn.addEventListener('click', requestUserLocation);
-        retryLocationBtn.addEventListener('click', requestUserLocation);
-
         // Escape tuşu ile modal'ı kapatma
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mapModal.classList.contains('active')) {
-                closeMapModalFunc();
+            if (e.key === 'Escape' && firstAidModal.classList.contains('active')) {
+                closeFirstAidModalFunc();
             }
         });
 
         // ==================== SAYFA YÜKLENDİĞİNDE ====================
 
-        // Sayfa yüklendiğinde konum iznini kontrol et (önbellekte varsa)
         window.addEventListener('load', () => {
-            const savedLocation = localStorage.getItem('userLocation');
-            if (savedLocation) {
-                userLocation = JSON.parse(savedLocation);
-            }
+            // Sayfa yüklendiğinde herhangi bir özel işlem yok
         });
-
-        // ==================== GERÇEK HARITA SİSTEMİ SONU ====================
     </script>
 </body>
 </html>
